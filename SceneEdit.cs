@@ -7,22 +7,22 @@ public sealed partial class PantheonOfRegions {
     {
         switch (next.name)
         {
-	case "GG_Vengefly_V":
+			case "GG_Vengefly_V":
         	//Vengefly Kings + Gorb
-		
                 running = true;
-		break;
+				break;
 			
-	case "GG_Mega_Moss_Charger":
-        	//
+			case "GG_Mega_Moss_Charger":
+        	//Moss Charger+Hornet 1
                 running = true;
-		break;
-	case "GG_Failed_Champion":
-        	//
+				break;
+			
+			case "GG_Failed_Champion":
+        	//Failed Champion + Mawlek
                 running = true;
-		break;
+				break;
 		
-	case "GG_Mantis_Lords_V":
+			case "GG_Mantis_Lords_V":
 		//Sisters of Battle + Hu
                 running = true;
                 GameObject battle2 = next.GetRootGameObjects().First(go => go.name == "Mantis Battle");
@@ -40,17 +40,18 @@ public sealed partial class PantheonOfRegions {
                             .ShareHealth(name: "Alliance Of Battle").HP =
                                 BossSceneController.Instance.BossLevel == 0 ? 2850 : 3650;
                     }, 4);
-                break;
+            break;
 			
-	case "GG_Crystal_Guardian_2":
-        	//
+			case "GG_Crystal_Guardian_2":
+        		//Crystal Guardian + Xero
+				//Different region but close enough
                 running = true;
-		break;
-	case "GG_Soul_Tyrant":
-        	//
+				break;
+			case "GG_Soul_Tyrant":
+        	//Soul Warrior + Knight
                 running = true;
-		break;
-	case "GG_Traitor_Lord":
+				break;
+			case "GG_Traitor_Lord":
                 //Traitor Lord + Marmu
                 running = true;
                 
@@ -74,23 +75,23 @@ public sealed partial class PantheonOfRegions {
                     }, 3);
                 break;
 			
-	case "GG_Nailmasters":
-        	//ALL Nailmasters!!!!
-                running = true;
-		break;
-	case "GG_Uumuu":
-        	//Uuwuu + No eyes
-                running = true;
-		break;
-	case "GG_Nosk_V":
+			case "GG_Nailmasters":
+        		//ALL Nailmasters!!!!
+        		running = true;
+				break;
+			case "GG_Uumuu":
+				//Uuwuu + No eyes
+        		running = true;
+				break;
+			case "GG_Nosk_V":
         	//Nosk + Galien
                 running = true;
-		break;
-	case "GG_White_Defender":
+				break;
+			case "GG_White_Defender":
         	//Flukemarm + White Defender (Not the other meaning)
                 running = true;
-		break;
-	case "GG_Hornet_2":
+				break;
+			case "GG_Hornet_2":
                 //Hive Knight + Hornet
                 running = true;
                 GameObject battle3 = next.GetRootGameObjects().First(go => go.name == "Boss Holder");
@@ -119,25 +120,34 @@ public sealed partial class PantheonOfRegions {
                     }, 3);
                 break;
 
-	case "GG_God_Tamer":
+			case "GG_God_Tamer":
         	//God Tamer + Obblelobles
                 running = true;
-		break;
-	case "GG_Watcher_Knights":
+				break;
+			case "GG_Watcher_Knights":
         	//Collector + Watcher knights
                 running = true;
-		break;
-	case "GG_Gruz_Mother":
+				break;
+			case "GG_Gruz_Mother":
         	//Gruz + Sly
                 running = true;
-		break;
-	case "GG_Grimm_Nightmare":
+				break;
+			case "GG_Grimm_Nightmare":
         	//NKG + Zote
                 running = true;
-		break;
-            default:
+				break;
+			case "GG_Hollow_Knight":
+        	//PV + Lost Kin
+                running = true;
+				break;
+			case "GG_Radiance":
+				//Absrad + Markoth + Seer
+				running = true;
+				break;
+			
+        default:
                 running = false;
                 return;
-        }
+    	}
 	}
 }
