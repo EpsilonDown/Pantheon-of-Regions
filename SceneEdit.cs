@@ -56,15 +56,15 @@ public sealed partial class PantheonOfRegions {
                 GameObject battle3 = next.GetRootGameObjects().First(go => go.name == "Boss Holder");
                 GameObject Hiveknight = GameObject.Find("Boss Holder/Hornet Boss 2");
 
-                /*PlayMakerFSM fsm3 = Hiveknight.LocateMyFSM("Control");
+                PlayMakerFSM fsm3 = Hiveknight.LocateMyFSM("Control");
                 fsm3.RemoveAction("Phase Check", 2);
                 fsm3.RemoveAction("Phase Check", 1);
                 var phase = fsm3.GetState("Phase Check");
-                phase.AddCustomAction(() => { fsm3.SendEvent("Phase 3"); }); */
+                phase.AddCustomAction(() => { fsm3.SendEvent("Phase 3"); }); 
                 InstantiateHornet();
                 HornetInstance!.SetActive(true);
                 HornetInstance.transform.position = new Vector2(35f, 30f);
-                /*
+			
                 battle3.Child("Hive Knight")
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Activate", () =>
@@ -76,7 +76,7 @@ public sealed partial class PantheonOfRegions {
                             .Append(HornetInstance!)
                             .ShareHealth(name: "Stinger Knights").HP =
                                 BossSceneController.Instance.BossLevel == 0 ? 1216 : 1900;
-                    }, 3); */
+                    }, 3);
                 break;
 
 
