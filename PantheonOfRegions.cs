@@ -59,20 +59,9 @@ namespace PantheonOfRegions
 			return value;
         }
 
-		private string ChangeText(string key, string sheetTitle, string orig) => key switch
-		{
-			"CustomBossDoorDesc" => "Bosses together strong",
-			"CustomBossDoorTitle" => "Pantheon of",
-			"CustomBossDoorSuper" => "Regions",
-            "TRAITOR_LORD_MAIN" => "Queen's",
-            "TRAITOR_LORD_SUB" => "Tributes",
-            "SISTERS_MAIN" => "Alliance",
-            "SISTERS_SUB" => "of Battle",
-            "HIVE_KNIGHT_MAIN" => "Stinger",
-            "HIVE_KNIGHT_SUB" => "Knights",
-            _ =>orig
+		
 
-		};
+  
         private void AddDoor(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.Scene arg1)
         {
 			bool flag = arg1.name == "GG_Atrium_Roof";
