@@ -7,11 +7,50 @@ public sealed partial class PantheonOfRegions {
     {
         switch (next.name)
         {
-            case "GG_":
-                //
+	case "GG_Vengefly_V":
+        	//Vengefly Kings + Gorb
+		
                 running = true;
+		break;
 			
-            case "GG_Traitor_Lord":
+	case "GG_Mega_Moss_Charger":
+        	//
+                running = true;
+		break;
+	case "GG_Failed_Champion":
+        	//
+                running = true;
+		break;
+		
+	case "GG_Mantis_Lords_V":
+		//Sisters of Battle + Hu
+                running = true;
+                GameObject battle2 = next.GetRootGameObjects().First(go => go.name == "Mantis Battle");
+                InstantiateHu(battle2);
+                battle2.Child("Mantis Lord Throne 2")
+                    .LocateMyFSM("Mantis Throne Main")
+                    .InsertCustomAction("Roar 2", () => {
+                        HuInstance!.SetActive(true);
+                        RingInstance!.SetActive(true);
+                        HuInstance.transform.position = new Vector2(30f, 12f);
+                        new[] { 1, 2, 3 }
+                            .Map(i => "Battle Sub/Mantis Lord S" + i)
+                            .Map(path => battle2.Child(path)!)
+                            .Append(HuInstance!)
+                            .ShareHealth(name: "Alliance Of Battle").HP =
+                                BossSceneController.Instance.BossLevel == 0 ? 2850 : 3650;
+                    }, 4);
+                break;
+			
+	case "GG_Crystal_Guardian_2":
+        	//
+                running = true;
+		break;
+	case "GG_Soul_Tyrant":
+        	//
+                running = true;
+		break;
+	case "GG_Traitor_Lord":
                 //Traitor Lord + Marmu
                 running = true;
                 
@@ -34,27 +73,24 @@ public sealed partial class PantheonOfRegions {
                                 BossSceneController.Instance.BossLevel == 0 ? 1216 : 1900;
                     }, 3);
                 break;
-
-            case "GG_Mantis_Lords_V":
+			
+	case "GG_Nailmasters":
+        	//ALL Nailmasters!!!!
                 running = true;
-                GameObject battle2 = next.GetRootGameObjects().First(go => go.name == "Mantis Battle");
-                InstantiateHu(battle2);
-                battle2.Child("Mantis Lord Throne 2")
-                    .LocateMyFSM("Mantis Throne Main")
-                    .InsertCustomAction("Roar 2", () => {
-                        HuInstance!.SetActive(true);
-                        RingInstance!.SetActive(true);
-                        HuInstance.transform.position = new Vector2(30f, 12f);
-                        new[] { 1, 2, 3 }
-                            .Map(i => "Battle Sub/Mantis Lord S" + i)
-                            .Map(path => battle2.Child(path)!)
-                            .Append(HuInstance!)
-                            .ShareHealth(name: "Alliance Of Battle").HP =
-                                BossSceneController.Instance.BossLevel == 0 ? 2850 : 3650;
-                    }, 4);
-                break;
-
-            case "GG_Hornet_2":
+		break;
+	case "GG_Uumuu":
+        	//Uuwuu + No eyes
+                running = true;
+		break;
+	case "GG_Nosk_V":
+        	//Nosk + Galien
+                running = true;
+		break;
+	case "GG_White_Defender":
+        	//Flukemarm + White Defender (Not the other meaning)
+                running = true;
+		break;
+	case "GG_Hornet_2":
                 //Hive Knight + Hornet
                 running = true;
                 GameObject battle3 = next.GetRootGameObjects().First(go => go.name == "Boss Holder");
@@ -83,7 +119,22 @@ public sealed partial class PantheonOfRegions {
                     }, 3);
                 break;
 
-
+	case "GG_God_Tamer":
+        	//God Tamer + Obblelobles
+                running = true;
+		break;
+	case "GG_Watcher_Knights":
+        	//Collector + Watcher knights
+                running = true;
+		break;
+	case "GG_Gruz_Mother":
+        	//Gruz + Sly
+                running = true;
+		break;
+	case "GG_Grimm_Nightmare":
+        	//NKG + Zote
+                running = true;
+		break;
             default:
                 running = false;
                 return;
