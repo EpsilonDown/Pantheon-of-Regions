@@ -1,3 +1,3 @@
-# Pantheon_of_Regions
+# Pantheon of Regions
 
-A mod for the game Hollow Knight. Pantheon of Regions.
+Adds new bosses rush to Hollow Knight, Pantheon of Regions.
