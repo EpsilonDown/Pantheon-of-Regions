@@ -7,6 +7,10 @@ public sealed partial class PantheonOfRegions {
     {
         switch (next.name)
         {
+            case "GG_":
+                //
+                running = true;
+			
             case "GG_Traitor_Lord":
                 //Traitor Lord + Marmu
                 running = true;
