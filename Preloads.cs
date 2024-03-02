@@ -13,10 +13,26 @@ public sealed partial class PantheonOfRegions {
 	private static GameObject? RingInstance = null;
 
     public override List<(string, string)> GetPreloadNames() => new() {
+		("GG_Ghost_Gorb", "Warrior/Ghost Warrior Slug"),
+		("GG_Hornet_1", "Boss Holder/Hornet Boss 1"),
+		("GG_Brooding_Mawlek", "Battle Scene/Mawlek Body"),
 		("GG_Ghost_Marmu", "Warrior/Ghost Warrior Marmu"),
         ("GG_Ghost_Hu", "Warrior/Ghost Warrior Hu"),
         ("GG_Ghost_Hu", "Ring Holder"),
+		("GG_Ghost_Xero", "Warrior/Ghost Warrior Xero"),
+		("GG_Mage_Knight_V", "Balloon Spawner/Mage Knight"),
+		("GG_Painter", "Battle Scene/Sheo Boss"),
+		("GG_Ghost_No_Eyes", "Warrior/Ghost Warrior No Eyes"),
+		("GG_Ghost_Galien", "Warrior/Ghost Warrior Galien"),
+		("GG_Flukemarm", "Fluke Mother"),
         ("GG_Hive_Knight", "Battle Scene/Hive Knight"),
+		("GG_Obblobbles", "Mega Fat Bee"),
+		("GG_Obblobbles", "Mega Fat Bee (1)"),
+		("GG_Watcher_Knights", "Battle Control"),
+		("GG_Sly", "Battle Scene/Sly Boss"),
+		("GG_Grey_Prince_Zote", "Grey Prince"),
+		("GG_Lost_Kin", "Lost Kin"),
+		("GG_Ghost_Markoth", "Warrior/Ghost Warrior Markoth"),
     };
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
