@@ -5,13 +5,12 @@ namespace PantheonOfRegions;
 public sealed partial class PantheonOfRegions {
 
     private static GameObject? MarmuPrefab = null;
-    private static GameObject? MarmuInstance = null;
     private static GameObject? HuPrefab = null;
-    private static GameObject? HuInstance = null;
     private static GameObject? RingPrefab = null;
-    private static GameObject? RingInstance = null;
-    private static GameObject? HornetPrefab = null;
-    private static GameObject? HornetInstance = null;
+    private static GameObject? HivePrefab = null;
+	
+    private static GameObject? BossInstance = null;
+	private static GameObject? RingInstance = null;
 
     public override List<(string, string)> GetPreloadNames() => new() {
 		("GG_Ghost_Marmu", "Warrior/Ghost Warrior Marmu"),
@@ -26,7 +25,7 @@ public sealed partial class PantheonOfRegions {
         MarmuPrefab = CreatePrefab(preloadedObjects["GG_Ghost_Marmu"]["Warrior/Ghost Warrior Marmu"]);
         HuPrefab = CreatePrefab(preloadedObjects["GG_Ghost_Hu"]["Warrior/Ghost Warrior Hu"]);
         RingPrefab = CreatePrefab(preloadedObjects["GG_Ghost_Hu"]["Ring Holder"]);
-        HornetPrefab = CreatePrefab(preloadedObjects["GG_Hive_Knight"]["Battle Scene/Hive Knight"]);
+        HivePrefab = CreatePrefab(preloadedObjects["GG_Hive_Knight"]["Battle Scene/Hive Knight"]);
     }
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -39,11 +38,11 @@ public sealed partial class PantheonOfRegions {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void InstantiateMarmu(GameObject parent)
     {
-        MarmuInstance = GameObject.Instantiate(MarmuPrefab)!;
-        MarmuInstance!.transform.parent = parent.transform;
+        BossInstance = GameObject.Instantiate(MarmuPrefab)!;
+        BossInstance!.transform.parent = parent.transform;
 
-        HealthManager hm = MarmuInstance.GetComponent<HealthManager>();
-        PlayMakerFSM fsm = MarmuInstance.LocateMyFSM("Control");
+        HealthManager hm = BossInstance.GetComponent<HealthManager>();
+        PlayMakerFSM fsm = BossInstance.LocateMyFSM("Control");
 
         #region FSM Changes
 
@@ -55,12 +54,12 @@ public sealed partial class PantheonOfRegions {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void InstantiateHu(GameObject parent)
     {
-        HuInstance = GameObject.Instantiate(HuPrefab)!;
+        BossInstance = GameObject.Instantiate(HuPrefab)!;
         RingInstance = GameObject.Instantiate(RingPrefab)!;
 
-        HuInstance!.transform.parent = parent.transform;
+        BossInstance!.transform.parent = parent.transform;
 
-        HealthManager hm = HuInstance.GetComponent<HealthManager>();
+        HealthManager hm = BossInstance.GetComponent<HealthManager>();
         PlayMakerFSM fsm = HuInstance.LocateMyFSM("Attacking");
         PlayMakerFSM move = HuInstance.LocateMyFSM("Movement");
 
@@ -119,11 +118,11 @@ public sealed partial class PantheonOfRegions {
 
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void InstantiateHornet()
+    private static void InstantiateHive()
     {
-        HornetInstance = GameObject.Instantiate(HornetPrefab)!;
+        HornetInstance = GameObject.Instantiate(HivePrefab)!;
 
-        HealthManager hm = HornetInstance.GetComponent<HealthManager>();
+        HealthManager hm = HiveInstance.GetComponent<HealthManager>();
         /*PlayMakerFSM fsm = HornetInstance.LocateMyFSM("Control");
         var inert = fsm.GetState("Inert");
         inert.RemoveTransition("GG BOSS");
