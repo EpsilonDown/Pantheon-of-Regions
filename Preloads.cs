@@ -18,7 +18,7 @@ public sealed partial class PantheonOfRegions {
         {
             #region
             ["broodingmawlek"] = ("GG_Brooding_Mawlek", "Battle Scene/Mawlek Body"),
-            ["thecollector"] = ("GG_Collector_V", "Battle Scene/Jar Collector"),
+            ["collector"] = ("GG_Collector_V", "Battle Scene/Jar Collector"),
             ["failedchampion"] = ("GG_Failed_Champion", "False Knight Dream"),
             ["flukemarm"] = ("GG_Flukemarm", "Fluke Mother"),
             ["galien"] = ("GG_Ghost_Galien", "Warrior/Ghost Warrior Galien"),
@@ -32,6 +32,7 @@ public sealed partial class PantheonOfRegions {
             ["xero"] = ("GG_Ghost_Xero", "Warrior/Ghost Warrior Xero"),
             ["greyprincezote"] = ("GG_Grey_Prince_Zote", "Grey Prince"),
             ["hiveknight"] = ("GG_Hive_Knight", "Battle Scene/Hive Knight"),
+	    ["hornetprotector"] = ("GG_Hornet_1", "Boss Holder/Hornet Boss 1"),
             ["lostkin"] = ("GG_Lost_Kin", "Lost Kin"),
             ["soulwarrior"] = ("GG_Mage_Knight", "Mage Knight"),
             ["mato"] = ("GG_Nailmasters", "Brothers/Mato"),
@@ -52,15 +53,15 @@ public sealed partial class PantheonOfRegions {
 	}
 		
 	private GameObject SpawnBoss(string Boss, Vector2 spawnPoint) 
-        {
-            GameObject boss = Instantiate(PantheonOfRegions.GameObjects[Boss], spawnPoint, Quaternion.identity);
-            enemy.SetActive(false);
-            enemy.AddComponent<EnemyTracker>();
-            var hm = enemy.GetComponent<HealthManager>();
-            hm.SetGeoSmall(0);
-            hm.SetGeoMedium(0);
-            hm.SetGeoLarge(0);
+    {
+		GameObject boss = Instantiate(PantheonOfRegions.GameObjects[Boss], spawnPoint, Quaternion.identity);
+        enemy.SetActive(false);
+        enemy.AddComponent<EnemyTracker>();
+        var hm = enemy.GetComponent<HealthManager>();
+        hm.SetGeoSmall(0);
+        hm.SetGeoMedium(0);
+        hm.SetGeoLarge(0);
 
-            return boss;
-        }
+        return boss;
+    }
 }
