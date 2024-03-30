@@ -8,8 +8,9 @@ public sealed partial class PantheonOfRegions {
         switch (next.name)
         {
 			case "GG_Vengefly_V":
-        	//Vengefly Kings + Gorb
+        		//Vengefly Kings + Gorb
                 running = true;
+				new GameObject Gorb = SpawnBoss("Gorb", new Vector2[30.0f,30.0f])
 				break;
 			
 			case "GG_Mega_Moss_Charger":
