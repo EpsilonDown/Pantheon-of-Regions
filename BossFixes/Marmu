@@ -1,9 +1,6 @@
-using HutongGames.PlayMaker.Actions;
-using Modding;
-using UnityEngine;
 using Vasi;
 
-namespace CustomTrial.Behaviours
+namespace PantheonOfRegions.Behaviours
 {
     internal class Marmu : MonoBehaviour
     {
