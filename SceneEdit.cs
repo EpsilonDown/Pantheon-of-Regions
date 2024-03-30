@@ -10,7 +10,7 @@ public sealed partial class PantheonOfRegions {
 			case "GG_Vengefly_V":
         		//Vengefly Kings + Gorb
                 running = true;
-				new GameObject Gorb = SpawnBoss("Gorb", new Vector2[30.0f,30.0f])
+				new GameObject Gorb = SpawnBoss("gorb", new Vector2 (30.0f,30.0f))
 				break;
 			
 			case "GG_Mega_Moss_Charger":
@@ -21,23 +21,23 @@ public sealed partial class PantheonOfRegions {
 			case "GG_Failed_Champion":
         	//Failed Champion + Mawlek
                 running = true;
+				new GameObject Mawlek = SpawnBoss("mawlek", new Vector2 (30.0f,30.0f))
 				break;
 		
 			case "GG_Mantis_Lords_V":
 		//Sisters of Battle + Hu
                 running = true;
-                GameObject battle2 = next.GetRootGameObjects().First(go => go.name == "Mantis Battle");
-                InstantiateHu(battle2);
+				new GameObject ElderHu = SpawnBoss("elderhu", new Vector2 (30.0f,30.0f))
+				new GameObject RingHolder = SpawnBoss("ringholder", new Vector2 (30.0f,30.0f))
+					
                 battle2.Child("Mantis Lord Throne 2")
                     .LocateMyFSM("Mantis Throne Main")
                     .InsertCustomAction("Roar 2", () => {
-                        HuInstance!.SetActive(true);
-                        RingInstance!.SetActive(true);
-                        HuInstance.transform.position = new Vector2(30f, 12f);
+                        ElderHu!.SetActive(true);
                         new[] { 1, 2, 3 }
                             .Map(i => "Battle Sub/Mantis Lord S" + i)
                             .Map(path => battle2.Child(path)!)
-                            .Append(HuInstance!)
+                            .Append(ElderHu)
                             .ShareHealth(name: "Alliance Of Battle").HP =
                                 BossSceneController.Instance.BossLevel == 0 ? 2850 : 3650;
                     }, 4);
