@@ -64,7 +64,7 @@ public sealed partial class PantheonOfRegions {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void InstantiateMarmu(GameObject parent)
     {
-		preloads.Add(_preloadDictionary[marmu]);
+	preloads.Add(_preloadDictionary[marmu]);
         GameObjects.Add(marmu, null);
 
 		
@@ -147,17 +147,5 @@ public sealed partial class PantheonOfRegions {
         move.GetAction<SetPosition>("Warp", 2).vector = new Vector3(30f, 20f, 0f);
 
     }
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void InstantiateHive()
-    {
-        HornetInstance = GameObject.Instantiate(HivePrefab)!;
 
-        HealthManager hm = HiveInstance.GetComponent<HealthManager>();
-        /*PlayMakerFSM fsm = HornetInstance.LocateMyFSM("Control");
-        var inert = fsm.GetState("Inert");
-        inert.RemoveTransition("GG BOSS");
-        inert.RemoveTransition("BATTLE START");
-        inert.RemoveTransition("REFIGHT");
-        inert.AddCustomAction(() => { fsm.SendEvent("Refight Ready"); });*/
-    }
 }
