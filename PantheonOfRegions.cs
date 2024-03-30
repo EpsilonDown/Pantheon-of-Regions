@@ -60,7 +60,6 @@ namespace PantheonOfRegions
         }
 
 		
-
   
         private void AddDoor(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.Scene arg1)
         {
@@ -83,7 +82,5 @@ namespace PantheonOfRegions
 			On.BossSequenceController.SetupNewSequence -= BossSequenceController_SetupNewSequence;
 			On.BossSceneController.Start -= CheckHUD;
         }
-
-	
 	}
 }
