@@ -12,28 +12,74 @@ public sealed partial class PantheonOfRegions {
     private static GameObject? BossInstance = null;
 	private static GameObject? RingInstance = null;
 
-    public override List<(string, string)> GetPreloadNames() => new() {
-		("GG_Ghost_Gorb", "Warrior/Ghost Warrior Slug"),
-		("GG_Hornet_1", "Boss Holder/Hornet Boss 1"),
-		("GG_Brooding_Mawlek", "Battle Scene/Mawlek Body"),
-		("GG_Ghost_Marmu", "Warrior/Ghost Warrior Marmu"),
-        ("GG_Ghost_Hu", "Warrior/Ghost Warrior Hu"),
-        ("GG_Ghost_Hu", "Ring Holder"),
-		("GG_Ghost_Xero", "Warrior/Ghost Warrior Xero"),
-		("GG_Mage_Knight_V", "Balloon Spawner/Mage Knight"),
-		("GG_Painter", "Battle Scene/Sheo Boss"),
-		("GG_Ghost_No_Eyes", "Warrior/Ghost Warrior No Eyes"),
-		("GG_Ghost_Galien", "Warrior/Ghost Warrior Galien"),
-		("GG_Flukemarm", "Fluke Mother"),
-        ("GG_Hive_Knight", "Battle Scene/Hive Knight"),
-		("GG_Obblobbles", "Mega Fat Bee"),
-		("GG_Obblobbles", "Mega Fat Bee (1)"),
-		("GG_Watcher_Knights", "Battle Control"),
-		("GG_Sly", "Battle Scene/Sly Boss"),
-		("GG_Grey_Prince_Zote", "Grey Prince"),
-		("GG_Lost_Kin", "Lost Kin"),
-		("GG_Ghost_Markoth", "Warrior/Ghost Warrior Markoth"),
-    };
+
+	public List<(string, string)> preloads = new();
+    private Dictionary<string, (string, string)> _preloadDictionary = new()
+        {
+            #region
+            ["brokenvessel"] = ("GG_Broken_Vessel", "Infected Knight"),
+            ["broodingmawlek"] = ("GG_Brooding_Mawlek", "Battle Scene/Mawlek Body"),
+            ["thecollector"] = ("GG_Collector_V", "Battle Scene/Jar Collector"),
+            ["crystalguardian"] = ("GG_Crystal_Guardian", "Mega Zombie Beam Miner (1)"),
+            ["turretcg1"] = ("GG_Crystal_Guardian", "Laser Turret Mega (1)"),
+            ["enragedguardian"] = ("GG_Crystal_Guardian_2", "Battle Scene/Zombie Beam Miner Rematch"),
+            ["turretcg2"] = ("GG_Crystal_Guardian_2", "Laser Turret Mega"),
+            ["dungdefender"] = ("GG_Dung_Defender", "Dung Defender"),
+            ["failedchampion"] = ("GG_Failed_Champion", "False Knight Dream"),
+            ["falseknight"] = ("GG_False_Knight", "Battle Scene/False Knight New"),
+            ["flukemarm"] = ("GG_Flukemarm", "Fluke Mother"),
+            ["galien"] = ("GG_Ghost_Galien", "Warrior/Ghost Warrior Galien"),
+            ["hammer"] = ("GG_Ghost_Galien", "Warrior/Galien Hammer"),
+            ["gorb"] = ("Cliffs_02_boss", "Warrior/Ghost Warrior Slug"),
+            ["elderhu"] = ("GG_Ghost_Hu", "Warrior/Ghost Warrior Hu"),
+            ["ringholder"] = ("GG_Ghost_Hu", "Ring Holder"),
+            ["markoth"] = ("GG_Ghost_Markoth", "Warrior/Ghost Warrior Markoth"),
+            ["marmu"] = ("GG_Ghost_Marmu", "Warrior/Ghost Warrior Marmu"),
+            ["noeyes"] = ("GG_Ghost_No_Eyes", "Warrior/Ghost Warrior No Eyes"),
+            ["xero"] = ("GG_Ghost_Xero", "Warrior/Ghost Warrior Xero"),
+            ["greyprincezote"] = ("GG_Grey_Prince_Zote", "Grey Prince"),
+            ["troupemastergrimm"] = ("GG_Grimm", "Grimm Scene/Grimm Boss"),
+            ["grimmspikeholder"] = ("GG_Grimm", "Grimm Spike Holder"),
+            ["nightmarekinggrimm"] = ("GG_Grimm_Nightmare", "Grimm Control/Nightmare Grimm Boss"),
+            ["nightmaregrimmspikeholder"] = ("GG_Grimm_Nightmare", "Grimm Spike Holder"),
+            ["grimmbats"] = ("GG_Grimm", "Grimm Bats"),
+            ["nightmaregrimmbats"] = ("GG_Grimm_Nightmare", "Grimm Control/Grimm Bats"),
+            ["gruzmother"] = ("GG_Gruz_Mother", "_Enemies/Giant Fly"),
+            ["hiveknight"] = ("GG_Hive_Knight", "Battle Scene/Hive Knight"),
+            ["purevessel"] = ("GG_Hollow_Knight", "Battle Scene/HK Prime"),
+            ["hornetprotector"] = ("GG_Hornet_1", "Boss Holder/Hornet Boss 1"),
+            ["hornetsentinel"] = ("GG_Hornet_2", "Boss Holder/Hornet Boss 2"),
+            ["barbregion"] = ("GG_Hornet_2", "Barb Region"),
+            ["lostkin"] = ("GG_Lost_Kin", "Lost Kin"),
+            ["palelurker"] = ("GG_Lurker", "Lurker Control/Pale Lurker"),
+            ["soulwarrior"] = ("GG_Mage_Knight", "Mage Knight"),
+            ["mantislord"] = ("GG_Mantis_Lords", "Mantis Battle/Battle Main/Mantis Lord"),
+            ["massivemosscharger"] = ("GG_Mega_Moss_Charger", "Mega Moss Charger"),
+            ["mato"] = ("GG_Nailmasters", "Brothers/Mato"),
+            ["oro"] = ("GG_Nailmasters", "Brothers/Oro"),
+            ["nosk"] = ("GG_Nosk", "Mimic Spider"),
+            ["wingednosk"] = ("GG_Nosk_Hornet", "Battle Scene/Hornet Nosk"),
+            ["globdropper"] = ("GG_Nosk_Hornet", "Battle Scene/Glob Dropper"),
+            ["roofdust"] = ("GG_Nosk_Hornet", "Battle Scene/Roof Dust"),
+            ["oblobble"] = ("GG_Oblobbles", "Mega Fat Bee"),
+            ["paintmastersheo"] = ("GG_Painter", "Battle Scene/Sheo Boss"),
+            ["absoluteradiance"] = ("GG_Radiance", "Boss Control/Absolute Radiance"),
+            ["greatnailsagesly"] = ("GG_Sly", "Battle Scene/Sly Boss"),
+            ["soulmaster"] = ("GG_Soul_Master", "Mage Lord"),
+            ["soultyrant"] = ("GG_Soul_Tyrant", "Dream Mage Lord"),
+            ["traitorlord"] = ("GG_Traitor_Lord", "Battle Scene/Wave 3/Mantis Traitor Lord"),
+            ["uumuu"] = ("GG_Uumuu", "Mega Jellyfish GG"),
+            ["jellyfishspawner"] = ("GG_Uumuu", "Jellyfish Spawner"),
+            ["megajellyfishmultizaps"] = ("GG_Uumuu", "Mega Jellyfish Multizaps"),
+            ["hatchercage"] = ("GG_Flukemarm", "Hatcher Cage (2)"),
+            ["vengeflyking"] = ("GG_Vengefly", "Giant Buzzer Col"),
+            ["watcherknight"] = ("GG_Watcher_Knights", "Battle Control/Black Knight 1"),
+            ["whitedefender"] = ("GG_White_Defender", "White Defender"),
+            ["thehollowknight"] = ("Room_Final_Boss_Core", "Boss Control/Hollow Knight Boss"),
+            ["theradiance"] = ("Dream_Final_Boss", "Boss Control/Radiance"),
+            ["sibling"] = ("Abyss_15", "Shade Sibling (14)"),
+            #endregion
+        };
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static void SavepreloadedObjects(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects) {
@@ -54,6 +100,10 @@ public sealed partial class PantheonOfRegions {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void InstantiateMarmu(GameObject parent)
     {
+		preloads.Add(_preloadDictionary[marmu]);
+        GameObjects.Add(marmu, null);
+
+		
         BossInstance = GameObject.Instantiate(MarmuPrefab)!;
         BossInstance!.transform.parent = parent.transform;
 
