@@ -16,6 +16,7 @@ public sealed partial class PantheonOfRegions {
 			case "GG_Mega_Moss_Charger":
         	//Moss Charger+Hornet 1
                 running = true;
+				new GameObject Hornet = SpawnBoss("hornetprotector", new Vector2 (30.0f,30.0f))
 				break;
 			
 			case "GG_Failed_Champion":
@@ -47,15 +48,19 @@ public sealed partial class PantheonOfRegions {
         		//Crystal Guardian + Xero
 				//Different region but close enough
                 running = true;
+				new GameObject Xero = SpawnBoss("xero", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_Soul_Tyrant":
         	//Soul Warrior + Knight
                 running = true;
+				new GameObject SoulWarrior = SpawnBoss("soulwarrior", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_Traitor_Lord":
                 //Traitor Lord + Marmu
                 running = true;
-                
+                new GameObject Marmu = SpawnBoss("marmu", new Vector2 (30.0f,30.0f))
                 GameObject TraitorLord = GameObject.Find("Battle Scene/Wave 3/Mantis Traitor Lord");
                 PlayMakerFSM fsm = TraitorLord.LocateMyFSM("Mantis");
                 fsm.RemoveAction("Slam?", 2);
@@ -70,7 +75,7 @@ public sealed partial class PantheonOfRegions {
                         MarmuInstance.transform.position = new Vector2(40f, 40f);
                         new[] { "Wave 3/Mantis Traitor Lord" }
                             .Map(path => battle.Child(path)!)
-                            .Append(MarmuInstance!)
+                            .Append(Marmu!)
                             .ShareHealth(name: "Queens Tributes").HP =
                                 BossSceneController.Instance.BossLevel == 0 ? 1216 : 1900;
                     }, 3);
@@ -79,34 +84,33 @@ public sealed partial class PantheonOfRegions {
 			case "GG_Nailmasters":
         		//ALL Nailmasters!!!!
         		running = true;
+				new GameObject Sheo = SpawnBoss("paintmaster", new Vector2 (30.0f,30.0f))
 				break;
 			case "GG_Uumuu":
 				//Uuwuu + No eyes
         		running = true;
+				new GameObject NoEyes = SpawnBoss("noeyes", new Vector2 (30.0f,30.0f))
 				break;
 			case "GG_Nosk_V":
         	//Nosk + Galien
                 running = true;
+				new GameObject Galien = SpawnBoss("galien", new Vector2 (30.0f,30.0f))
+				new GameObject Hammer = SpawnBoss("hammer", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_White_Defender":
         	//Flukemarm + White Defender (Not the other meaning)
                 running = true;
+				new GameObject Flukemarm = SpawnBoss("flukemarm", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_Hornet_2":
                 //Hive Knight + Hornet
                 running = true;
+				
+				new GameObject HiveKnight = SpawnBoss("hiveknight", new Vector2 (30.0f,30.0f))
+				
                 GameObject battle3 = next.GetRootGameObjects().First(go => go.name == "Boss Holder");
-                GameObject Hiveknight = GameObject.Find("Boss Holder/Hornet Boss 2");
-
-                PlayMakerFSM fsm3 = Hiveknight.LocateMyFSM("Control");
-                fsm3.RemoveAction("Phase Check", 2);
-                fsm3.RemoveAction("Phase Check", 1);
-                var phase = fsm3.GetState("Phase Check");
-                phase.AddCustomAction(() => { fsm3.SendEvent("Phase 3"); }); 
-                InstantiateHornet();
-                HornetInstance!.SetActive(true);
-                HornetInstance.transform.position = new Vector2(35f, 30f);
-			
                 battle3.Child("Hive Knight")
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Activate", () =>
@@ -124,26 +128,39 @@ public sealed partial class PantheonOfRegions {
 			case "GG_God_Tamer":
         	//God Tamer + Obblelobles
                 running = true;
+				new GameObject Oblobble1 = SpawnBoss("oblobble", new Vector2 (30.0f,30.0f))
+				new GameObject Oblobble2 = SpawnBoss("oblobble", new Vector2 (60.0f,30.0f))
 				break;
+				
 			case "GG_Watcher_Knights":
         	//Collector + Watcher knights
                 running = true;
+				new GameObject Collector = SpawnBoss("collector", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_Gruz_Mother":
         	//Gruz + Sly
                 running = true;
+				new GameObject Sly = SpawnBoss("greatnailsagesly", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_Grimm_Nightmare":
         	//NKG + Zote
                 running = true;
+				new GameObject Zote = SpawnBoss("greyprincezote", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_Hollow_Knight":
         	//PV + Lost Kin
                 running = true;
+				new GameObject VoidKin = SpawnBoss("lostkin", new Vector2 (30.0f,30.0f))
+				new GameObject Sibling = SpawnBoss("sibling", new Vector2 (30.0f,30.0f))
 				break;
+				
 			case "GG_Radiance":
 				//Absrad + Markoth + Seer
 				running = true;
+				new GameObject Markoth = SpawnBoss("markoth", new Vector2 (30.0f,30.0f))
 				break;
 			
         default:
