@@ -11,6 +11,7 @@ namespace PantheonOfRegions
         public PantheonOfRegions() =>
 			OsmiHooks.SceneChangeHook += EditScene;
         public override string GetVersion() => "v0.1";
+	
         public override void Initialize(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects)
         {
             SavepreloadedObjects(preloadedObjects);
@@ -74,6 +75,7 @@ namespace PantheonOfRegions
             }
 			Log("Set Custom Door");
 		}
+  
 		public void Unload()
         {
 			UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= AddDoor;
@@ -81,6 +83,7 @@ namespace PantheonOfRegions
 			ModHooks.GetPlayerVariableHook -= ChangeCustomDoorVar;
 			On.BossSequenceController.SetupNewSequence -= BossSequenceController_SetupNewSequence;
 			On.BossSceneController.Start -= CheckHUD;
+   			Log("Unloaded")
         }
 	}
 }
