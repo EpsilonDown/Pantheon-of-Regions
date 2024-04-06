@@ -1,9 +1,6 @@
-using HutongGames.PlayMaker.Actions;
-using System.Collections;
-using UnityEngine;
 using Vasi;
 
-namespace CustomTrial.Behaviours
+namespace PantheonOfRegions.Behaviours
 {
     internal class TheCollector : MonoBehaviour
     {
