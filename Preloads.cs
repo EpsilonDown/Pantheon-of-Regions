@@ -19,10 +19,7 @@ public sealed partial class PantheonOfRegions {
             #region
             ["broodingmawlek"] = ("GG_Brooding_Mawlek", "Battle Scene/Mawlek Body"),
             ["collector"] = ("GG_Collector_V", "Battle Scene/Jar Collector"),
-            ["failedchampion"] = ("GG_Failed_Champion", "False Knight Dream"),
             ["flukemarm"] = ("GG_Flukemarm", "Fluke Mother"),
-            ["galien"] = ("GG_Ghost_Galien", "Warrior/Ghost Warrior Galien"),
-            ["hammer"] = ("GG_Ghost_Galien", "Warrior/Galien Hammer"),
             ["gorb"] = ("Cliffs_02_boss", "Warrior/Ghost Warrior Slug"),
             ["elderhu"] = ("GG_Ghost_Hu", "Warrior/Ghost Warrior Hu"),
             ["ringholder"] = ("GG_Ghost_Hu", "Ring Holder"),
