@@ -70,11 +70,6 @@ namespace PantheonOfRegions.Behaviours
             }
         }
 
-        private void OnDeath()
-        {
-            Destroy(_ringHolder);
-        }
-
         private Vector3 RandomVector3()
         {
             float x = Random.Range(ArenaInfo.LeftX, ArenaInfo.RightX);
