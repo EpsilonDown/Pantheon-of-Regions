@@ -5,32 +5,37 @@ public sealed partial class PantheonOfRegions {
 
 	private static void EditScene(Scene prev, Scene next)
     {
+		new GameObject battle = null;
         switch (next.name)
         {
 			case "GG_Vengefly_V":
         		//Vengefly Kings + Gorb
                 running = true;
-				new GameObject Gorb = SpawnBoss("gorb", new Vector2 (30.0f,30.0f))
+				new GameObject Gorb = SpawnBoss("gorb", new Vector2 (30.0f,30.0f));
+				new GameObject VengeflyKing = GameObject.Find("Giant Buzzer Col");
 				break;
 			
 			case "GG_Mega_Moss_Charger":
         	//Moss Charger+Hornet 1
                 running = true;
-				new GameObject Hornet = SpawnBoss("hornetprotector", new Vector2 (30.0f,30.0f))
+				new GameObject Hornet = SpawnBoss("hornetprotector", new Vector2 (30.0f,30.0f));
+				new GameObject MassiveMossCharger = GameObject.Find("Mega Moss Charger");
 				break;
 			
 			case "GG_Failed_Champion":
         	//Failed Champion + Mawlek
                 running = true;
-				new GameObject Mawlek = SpawnBoss("mawlek", new Vector2 (30.0f,30.0f))
+				new GameObject Mawlek = SpawnBoss("mawlek", new Vector2 (30.0f,30.0f));
+				new GameObject FailedChampion = GameObject.Find("Giant Buzzer Col");
 				break;
 		
 			case "GG_Mantis_Lords_V":
 		//Sisters of Battle + Hu
                 running = true;
-				new GameObject ElderHu = SpawnBoss("elderhu", new Vector2 (30.0f,30.0f))
-				new GameObject RingHolder = SpawnBoss("ringholder", new Vector2 (30.0f,30.0f))
-					
+				new GameObject ElderHu = SpawnBoss("elderhu", new Vector2 (30.0f,30.0f));
+				new GameObject RingHolder = SpawnBoss("ringholder", new Vector2 (30.0f,30.0f));
+				GameObject battle = next.GetRootGameObjects().First(go => go.name == "Boss Holder");
+				
                 battle2.Child("Mantis Lord Throne 2")
                     .LocateMyFSM("Mantis Throne Main")
                     .InsertCustomAction("Roar 2", () => {
@@ -48,20 +53,23 @@ public sealed partial class PantheonOfRegions {
         		//Crystal Guardian + Xero
 				//Different region but close enough
                 running = true;
-				new GameObject Xero = SpawnBoss("xero", new Vector2 (30.0f,30.0f))
+				new GameObject Xero = SpawnBoss("xero", new Vector2 (30.0f,30.0f));
+				new GameObject EnragedGuardian = GameObject.Find("Battle Scene/Zombie Beam Miner Rematch");
 				break;
 				
 			case "GG_Soul_Tyrant":
         	//Soul Warrior + Knight
                 running = true;
 				new GameObject SoulWarrior = SpawnBoss("soulwarrior", new Vector2 (30.0f,30.0f))
+				new GameObject SoulTyrant = GameObject.Find("Dream Mage Lord");
 				break;
 				
 			case "GG_Traitor_Lord":
                 //Traitor Lord + Marmu
                 running = true;
                 new GameObject Marmu = SpawnBoss("marmu", new Vector2 (30.0f,30.0f))
-                GameObject TraitorLord = GameObject.Find("Battle Scene/Wave 3/Mantis Traitor Lord");
+                new GameObject TraitorLord = GameObject.Find("Battle Scene/Wave 3/Mantis Traitor Lord");
+				
                 PlayMakerFSM fsm = TraitorLord.LocateMyFSM("Mantis");
                 fsm.RemoveAction("Slam?", 2);
 
@@ -71,12 +79,7 @@ public sealed partial class PantheonOfRegions {
                     .LocateMyFSM("Mantis")
                     .InsertCustomAction("Roar", () =>
                     {
-                        MarmuInstance!.SetActive(true);
-                        MarmuInstance.transform.position = new Vector2(40f, 40f);
-                        new[] { "Wave 3/Mantis Traitor Lord" }
-                            .Map(path => battle.Child(path)!)
-                            .Append(Marmu!)
-                            .ShareHealth(name: "Queens Tributes").HP =
+                        new[] { "Wave 3/Mantis Traitor Lord" }.Map(path => battle.Child(path)!).Append(Marmu!).ShareHealth(name: "Queens Tributes").HP =
                                 BossSceneController.Instance.BossLevel == 0 ? 1216 : 1900;
                     }, 3);
                 break;
@@ -85,23 +88,32 @@ public sealed partial class PantheonOfRegions {
         		//ALL Nailmasters!!!!
         		running = true;
 				new GameObject Sheo = SpawnBoss("paintmaster", new Vector2 (30.0f,30.0f))
+				new GameObject Oro = GameObject.Find("Brothers/Oro");
+				new GameObject Mato = GameObject.Find("Brothers/Mato");
 				break;
+
+				
 			case "GG_Uumuu":
 				//Uuwuu + No eyes
         		running = true;
 				new GameObject NoEyes = SpawnBoss("noeyes", new Vector2 (30.0f,30.0f))
+				new GameObject Uumuu = GameObject.Find("Mega Jellyfish GG");
 				break;
+
+				
 			case "GG_Nosk_V":
         	//Nosk + Galien
                 running = true;
 				new GameObject Galien = SpawnBoss("galien", new Vector2 (30.0f,30.0f))
 				new GameObject Hammer = SpawnBoss("hammer", new Vector2 (30.0f,30.0f))
+				new GameObject Nosk = GameObject.Find("Mimic Spider");
 				break;
 				
 			case "GG_White_Defender":
         	//Flukemarm + White Defender (Not the other meaning)
                 running = true;
 				new GameObject Flukemarm = SpawnBoss("flukemarm", new Vector2 (30.0f,30.0f))
+				new GameObject WhiteDefender = GameObject.Find("White Defender");
 				break;
 				
 			case "GG_Hornet_2":
@@ -109,8 +121,9 @@ public sealed partial class PantheonOfRegions {
                 running = true;
 				
 				new GameObject HiveKnight = SpawnBoss("hiveknight", new Vector2 (30.0f,30.0f))
+				new GameObject HornetSentinel = GameObject.Find("Boss Holder/Hornet Boss 2");
 				
-                GameObject battle3 = next.GetRootGameObjects().First(go => go.name == "Boss Holder");
+                
                 battle3.Child("Hive Knight")
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Activate", () =>
@@ -136,18 +149,21 @@ public sealed partial class PantheonOfRegions {
         	//Collector + Watcher knights
                 running = true;
 				new GameObject Collector = SpawnBoss("collector", new Vector2 (30.0f,30.0f))
+				new GameObject WatcherKnight = GameObject.Find("Battle Control/Black Knight 1");
 				break;
 				
 			case "GG_Gruz_Mother":
         	//Gruz + Sly
                 running = true;
 				new GameObject Sly = SpawnBoss("greatnailsagesly", new Vector2 (30.0f,30.0f))
+				new GameObject GruzMother = GameObject.Find("_Enemies/Giant Fly");
 				break;
 				
 			case "GG_Grimm_Nightmare":
         	//NKG + Zote
                 running = true;
 				new GameObject Zote = SpawnBoss("greyprincezote", new Vector2 (30.0f,30.0f))
+				new GameObject NKG = GameObject.Find("Grimm Control/Nightmare Grimm Boss");
 				break;
 				
 			case "GG_Hollow_Knight":
@@ -155,12 +171,14 @@ public sealed partial class PantheonOfRegions {
                 running = true;
 				new GameObject VoidKin = SpawnBoss("lostkin", new Vector2 (30.0f,30.0f))
 				new GameObject Sibling = SpawnBoss("sibling", new Vector2 (30.0f,30.0f))
+				new GameObject PureVessel = GameObject.Find("Battle Scene/HK Prime");
 				break;
 				
 			case "GG_Radiance":
 				//Absrad + Markoth + Seer
 				running = true;
 				new GameObject Markoth = SpawnBoss("markoth", new Vector2 (30.0f,30.0f))
+				new GameObject AbsoluteRadiance = GameObject.Find("Boss Control/Absolute Radiance");
 				break;
 			
         default:
