@@ -34,6 +34,7 @@ public sealed partial class PantheonOfRegions {
                 running = true;
 				new GameObject ElderHu = SpawnBoss("elderhu", new Vector2 (30.0f,30.0f));
 				new GameObject RingHolder = SpawnBoss("ringholder", new Vector2 (30.0f,30.0f));
+				
 				GameObject battle = next.GetRootGameObjects().First(go => go.name == "Boss Holder");
 				
                 battle2.Child("Mantis Lord Throne 2")
@@ -70,16 +71,15 @@ public sealed partial class PantheonOfRegions {
                 new GameObject Marmu = SpawnBoss("marmu", new Vector2 (30.0f,30.0f));
                 GameObject TraitorLord = GameObject.Find("Battle Scene/Wave 3/Mantis Traitor Lord");
 				
-                PlayMakerFSM fsm = TraitorLord.LocateMyFSM("Mantis");
-                fsm.RemoveAction("Slam?", 2);
-
-                GameObject battle = next.GetRootGameObjects().First(go => go.name == "Battle Scene");
-                InstantiateMarmu(battle);
+				TraitorLord.LocateMyFSM("Mantis").RemoveAction("Slam?", 2);
+				TraitorLord.transform.parent = battle
+				Marmu.transform.parent = battle
+				
                 battle.Child("Wave 3/Mantis Traitor Lord")
                     .LocateMyFSM("Mantis")
                     .InsertCustomAction("Roar", () =>
                     {
-                        new[] { "Wave 3/Mantis Traitor Lord" }.Map(path => battle.Child(path)!).Append(Marmu!).ShareHealth(name: "Queens Tributes").HP =
+                        new[] {"Wave 3/Mantis Traitor Lord"}.Map(path => battle.Child(path)!).Append(Marmu!).ShareHealth(name: "Queens Tributes").HP =
                                 BossSceneController.Instance.BossLevel == 0 ? 1216 : 1900;
                     }, 3);
                 break;
@@ -124,7 +124,7 @@ public sealed partial class PantheonOfRegions {
 				GameObject HornetSentinel = GameObject.Find("Boss Holder/Hornet Boss 2");
 				
                 
-                battle3.Child("Hive Knight")
+                battle.Child("Hive Knight")
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Activate", () =>
                     {
