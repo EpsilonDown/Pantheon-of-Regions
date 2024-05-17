@@ -334,6 +334,10 @@
       <HintPath>$(HollowKnightRefs)/Mods/Osmi/Osmi.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Vasi">
+      <HintPath>$(HollowKnightRefs)/Mods/Vasi/Vasi.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
