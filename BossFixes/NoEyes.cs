@@ -1,3 +1,6 @@
+using Vasi;
+using HutongGames.PlayMaker.Actions;
+using Random = UnityEngine.Random;
 namespace PantheonOfRegions.Behaviours
 {
     internal class NoEyes : MonoBehaviour
@@ -34,19 +37,19 @@ namespace PantheonOfRegions.Behaviours
                 _movement.Fsm.GetFsmVector3($"P{index}").Value = RandomVector3();
             }
 
-            _shotSpawn.GetAction<RandomFloat>("Spawn L", 1).min = ArenaInfo.BottomY;
-            _shotSpawn.GetAction<RandomFloat>("Spawn L", 1).max = ArenaInfo.CenterY;
-            _shotSpawn.GetAction<SetPosition>("Spawn L", 2).x = ArenaInfo.LeftX;
-            _shotSpawn.GetAction<RandomFloat>("Spawn L", 5).min = ArenaInfo.CenterY;
-            _shotSpawn.GetAction<RandomFloat>("Spawn L", 5).max = ArenaInfo.TopY;
-            _shotSpawn.GetAction<SetPosition>("Spawn L", 6).x = ArenaInfo.RightX;
+            _shotSpawn.GetAction<RandomFloat>("Spawn L", 1).min = 105f;
+            _shotSpawn.GetAction<RandomFloat>("Spawn L", 1).max = 135f;
+            _shotSpawn.GetAction<SetPosition>("Spawn L", 2).x = 35f;
+            _shotSpawn.GetAction<RandomFloat>("Spawn L", 5).min = 120f;
+            _shotSpawn.GetAction<RandomFloat>("Spawn L", 5).max = 135f;
+            _shotSpawn.GetAction<SetPosition>("Spawn L", 6).x = 70f;
 
-            _shotSpawn.GetAction<RandomFloat>("Spawn R", 1).min = ArenaInfo.BottomY;
-            _shotSpawn.GetAction<RandomFloat>("Spawn R", 1).max = ArenaInfo.CenterY;
-            _shotSpawn.GetAction<SetPosition>("Spawn R", 2).x = ArenaInfo.RightX;
-            _shotSpawn.GetAction<RandomFloat>("Spawn R", 5).min = ArenaInfo.CenterY;
-            _shotSpawn.GetAction<RandomFloat>("Spawn R", 5).max = ArenaInfo.TopY;
-            _shotSpawn.GetAction<SetPosition>("Spawn R", 6).x = ArenaInfo.LeftX;
+            _shotSpawn.GetAction<RandomFloat>("Spawn R", 1).min = 105f;
+            _shotSpawn.GetAction<RandomFloat>("Spawn R", 1).max = 120f;
+            _shotSpawn.GetAction<SetPosition>("Spawn R", 2).x = 70f;
+            _shotSpawn.GetAction<RandomFloat>("Spawn R", 5).min = 120f;
+            _shotSpawn.GetAction<RandomFloat>("Spawn R", 5).max = 135f;
+            _shotSpawn.GetAction<SetPosition>("Spawn R", 6).x = 35f;
 
             _shotSpawn.GetState("Spawn L").InsertMethod(1, () => _heads.Add(_shotSpawn.Fsm.GetFsmGameObject("Shot").Value));
             _shotSpawn.GetState("Spawn L").InsertMethod(6, () => _heads.Add(_shotSpawn.Fsm.GetFsmGameObject("Shot").Value));
@@ -56,8 +59,8 @@ namespace PantheonOfRegions.Behaviours
         
         private Vector3 RandomVector3()
         {
-            float x = Random.Range(ArenaInfo.LeftX, ArenaInfo.RightX);
-            float y = Random.Range(ArenaInfo.BottomY, ArenaInfo.TopY);
+            float x = Random.Range(35f, 70f);
+            float y = Random.Range(105f, 135f);
             float z = 0.006f;
 
             return new Vector3(x, y, z);

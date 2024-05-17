@@ -1,5 +1,6 @@
+using HutongGames.PlayMaker.Actions;
 using Vasi;
-
+using Random = UnityEngine.Random;
 namespace PantheonOfRegions.Behaviours
 {
     internal class Markoth : MonoBehaviour
@@ -52,8 +53,8 @@ namespace PantheonOfRegions.Behaviours
 
         private Vector3 RandomVector3()
         {
-            float x = Random.Range(ArenaInfo.LeftX, ArenaInfo.RightX);
-            float y = Random.Range(ArenaInfo.BottomY, ArenaInfo.TopY);
+            float x = Random.Range(49f, 72f);
+            float y = Random.Range(21f, 32f);
             float z = 0.006f;
 
             return new Vector3(x, y, z);
@@ -65,10 +66,10 @@ namespace PantheonOfRegions.Behaviours
         private void Start()
         {
             PlayMakerFSM nailCtrl = gameObject.LocateMyFSM("Control");
-            nailCtrl.GetAction<RandomFloat>("Set Pos", 0).max = ArenaInfo.DefaultRightX;
-            nailCtrl.GetAction<RandomFloat>("Set Pos", 0).min = ArenaInfo.DefaultLeftX;
-            nailCtrl.GetAction<RandomFloat>("Set Pos", 1).max = ArenaInfo.DefaultTopY;
-            nailCtrl.GetAction<RandomFloat>("Set Pos", 1).min = ArenaInfo.DefaultBottomY;
+            nailCtrl.GetAction<RandomFloat>("Set Pos", 0).max = 72f;
+            nailCtrl.GetAction<RandomFloat>("Set Pos", 0).min = 49f;
+            nailCtrl.GetAction<RandomFloat>("Set Pos", 1).max = 32f;
+            nailCtrl.GetAction<RandomFloat>("Set Pos", 1).min = 21f;
             FsmState checkDistance = nailCtrl.GetState("Check Distance");
             checkDistance.InsertMethod(0, () => nailCtrl.Fsm.GetFsmVector3("Tele Pos").Value = transform.position);
             checkDistance.GetAction<FloatCompare>(2).float2 = 2;

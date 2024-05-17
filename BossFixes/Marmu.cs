@@ -1,4 +1,5 @@
 using Vasi;
+using HutongGames.PlayMaker.Actions;
 
 namespace PantheonOfRegions.Behaviours
 {
@@ -15,10 +16,10 @@ namespace PantheonOfRegions.Behaviours
 
         private void Start()
         {
-            _control.Fsm.GetFsmFloat("Tele X Max").Value = ArenaInfo.RightX - 3;
-            _control.Fsm.GetFsmFloat("Tele X Min").Value = ArenaInfo.LeftX + 3;
-            _control.Fsm.GetFsmFloat("Tele Y Max").Value = ArenaInfo.TopY - 3;
-            _control.Fsm.GetFsmFloat("Tele Y Min").Value = ArenaInfo.BottomY + 3;
+            _control.Fsm.GetFsmFloat("Tele X Max").Value = 56f;
+            _control.Fsm.GetFsmFloat("Tele X Min").Value = 23f;
+            _control.Fsm.GetFsmFloat("Tele Y Max").Value = 37f;
+            _control.Fsm.GetFsmFloat("Tele Y Min").Value = 33f;
         }
     }
 }

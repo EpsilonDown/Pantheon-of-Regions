@@ -1,3 +1,6 @@
+using HutongGames.PlayMaker.Actions;
+using Vasi;
+
 namespace PantheonOfRegions.Behaviours
 {
     internal class GreatNailsageSly : MonoBehaviour
@@ -15,12 +18,12 @@ namespace PantheonOfRegions.Behaviours
 
             _control.Fsm.GetFsmBool("Final Rage").Value = true;
             
-            _control.GetAction<FloatCompare>("Cyc Down").float2.Value = ArenaInfo.BottomY + 4;
-            _control.GetAction<FloatOperator>("Cyc Jump Launch").float1.Value = ArenaInfo.CenterX;
-            _control.GetAction<SetFloatValue>("Jump To L", 0).floatValue.Value = ArenaInfo.RightX - 8;
-            _control.GetAction<SetFloatValue>("Jump To L", 1).floatValue.Value = ArenaInfo.LeftX;
-            _control.GetAction<SetFloatValue>("Jump To R", 0).floatValue.Value = ArenaInfo.LeftX + 8;
-            _control.GetAction<SetFloatValue>("Jump To R", 1).floatValue.Value = ArenaInfo.RightX;
+            _control.GetAction<FloatCompare>("Cyc Down").float2.Value = 15f + 4f;
+            _control.GetAction<FloatOperator>("Cyc Jump Launch").float1.Value = 20f;
+            _control.GetAction<SetFloatValue>("Jump To L", 0).floatValue.Value = 24f - 8f;
+            _control.GetAction<SetFloatValue>("Jump To L", 1).floatValue.Value = 15f;
+            _control.GetAction<SetFloatValue>("Jump To R", 0).floatValue.Value = 15f + 8f;
+            _control.GetAction<SetFloatValue>("Jump To R", 1).floatValue.Value = 24f;
             
             _control.GetState("Bow").AddCoroutine(TweenOut);
             _control.GetState("Stun Wait").AddMethod(() => _control.SendEvent("READY"));
@@ -47,9 +50,8 @@ namespace PantheonOfRegions.Behaviours
             yield return new WaitUntil(() =>
             {
                 transform.Translate(Vector3.down * 25 * Time.deltaTime);
-                return transform.position.y <= ArenaInfo.BottomY - 10;
+                return transform.position.y <= 5f;
             });
-            ColosseumManager.EnemyCount--;
             Destroy(gameObject);
         }
     }

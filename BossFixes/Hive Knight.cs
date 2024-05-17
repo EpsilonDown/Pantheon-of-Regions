@@ -1,3 +1,5 @@
+using HutongGames.PlayMaker.Actions;
+
 namespace PantheonOfRegions.Behaviours
 {
     internal class HiveKnight : MonoBehaviour
@@ -17,8 +19,8 @@ namespace PantheonOfRegions.Behaviours
 
             GetComponent<MeshRenderer>().enabled = true;
 
-            _control.Fsm.GetFsmFloat("Left X").Value = ArenaInfo.LeftX;
-            _control.Fsm.GetFsmFloat("Right X").Value = ArenaInfo.RightX;
+            _control.Fsm.GetFsmFloat("Left X").Value = 15f;
+            _control.Fsm.GetFsmFloat("Right X").Value = 37f;
             _control.SetState("Activate");
         }
     }

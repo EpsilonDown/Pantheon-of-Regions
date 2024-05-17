@@ -1,3 +1,6 @@
+using Vasi;
+using HutongGames.PlayMaker.Actions;
+using Random = UnityEngine.Random;
 namespace PantheonOfRegions.Behaviours
 {
     internal class Gorb : MonoBehaviour
@@ -24,22 +27,22 @@ namespace PantheonOfRegions.Behaviours
                 _movement.Fsm.GetFsmVector3($"P{index}").Value = RandomVector3();
             }
 
-            _movement.GetAction<FloatCompare>("Hover", 4).float2 = ArenaInfo.LeftX;
-            _movement.GetAction<FloatCompare>("Hover", 5).float2 = ArenaInfo.RightX;
-            _movement.GetAction<FloatCompare>("Hover", 6).float2 = ArenaInfo.CenterY;
+            _movement.GetAction<FloatCompare>("Hover", 4).float2 = 30f;
+            _movement.GetAction<FloatCompare>("Hover", 5).float2 = 65f;
+            _movement.GetAction<FloatCompare>("Hover", 6).float2 = 18f;
             _movement.GetAction<FaceObject>("Hover").objectB = HeroController.instance.gameObject;
             
-            _movement.GetAction<FloatTestToBool>("Set Warp", 2).float2 = ArenaInfo.CenterX;
-            _movement.GetAction<FloatTestToBool>("Set Warp", 3).float2 = ArenaInfo.CenterX;
+            _movement.GetAction<FloatTestToBool>("Set Warp", 2).float2 = 48f;
+            _movement.GetAction<FloatTestToBool>("Set Warp", 3).float2 = 48f;
 
-            _movement.GetAction<SetPosition>("Return").x = ArenaInfo.CenterX;
-            _movement.GetAction<SetPosition>("Return").y = ArenaInfo.CenterY;
+            _movement.GetAction<SetPosition>("Return").x = 48f;
+            _movement.GetAction<SetPosition>("Return").y = 18f;
         }
 
         private Vector3 RandomVector3()
         {
-            float x = Random.Range(ArenaInfo.LeftX, ArenaInfo.RightX);
-            float y = Random.Range(ArenaInfo.BottomY, ArenaInfo.TopY);
+            float x = Random.Range(30f, 65f);
+            float y = Random.Range(14f, 22f);
 
             return new Vector3(x, y, .006f);
         }

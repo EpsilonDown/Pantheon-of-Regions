@@ -1,4 +1,4 @@
-namespace CustomTrial.Behaviours
+namespace PantheonOfRegions.Behaviours
 {
     internal class SoulWarrior : MonoBehaviour
     {
@@ -11,8 +11,8 @@ namespace CustomTrial.Behaviours
 
         private IEnumerator Start()
         {
-            _knight.Fsm.GetFsmFloat("Tele X Max").Value = ArenaInfo.RightX;
-            _knight.Fsm.GetFsmFloat("Tele X Min").Value = ArenaInfo.LeftX;
+            _knight.Fsm.GetFsmFloat("Tele X Max").Value = 43f;
+            _knight.Fsm.GetFsmFloat("Tele X Min").Value = 29f;
             
             _knight.SetState("Init");
             

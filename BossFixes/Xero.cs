@@ -1,3 +1,6 @@
+using Vasi;
+using HutongGames.PlayMaker.Actions;
+using Random = UnityEngine.Random;
 namespace PantheonOfRegions.Behaviours
 {
     internal class Xero : MonoBehaviour
@@ -26,13 +29,13 @@ namespace PantheonOfRegions.Behaviours
                 _movement.Fsm.GetFsmVector3($"P{index}").Value = RandomVector3();
             }
             
-            _yLimit.GetAction<FloatClamp>("Limit").maxValue = ArenaInfo.CenterY;
+            _yLimit.GetAction<FloatClamp>("Limit").maxValue = 15f;
         }
         
         private Vector3 RandomVector3()
         {
-            float x = Random.Range(ArenaInfo.LeftX, ArenaInfo.RightX);
-            float y = Random.Range(ArenaInfo.BottomY, ArenaInfo.TopY);
+            float x = Random.Range(20f, 40f);
+            float y = Random.Range(10f, 20f);
             float z = 0.006f;
 
             return new Vector3(x, y, z);

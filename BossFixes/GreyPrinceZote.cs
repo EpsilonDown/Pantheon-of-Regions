@@ -1,3 +1,5 @@
+using Vasi;
+using HutongGames.PlayMaker.Actions;
 namespace PantheonOfRegions.Behaviours
 {
     internal class GreyPrinceZote : MonoBehaviour
@@ -13,11 +15,11 @@ namespace PantheonOfRegions.Behaviours
 
         private IEnumerator Start()
         {
-            _constrainX.Fsm.GetFsmFloat("Edge L").Value = ArenaInfo.LeftX;
-            _constrainX.Fsm.GetFsmFloat("Edge R").Value = ArenaInfo.RightX;
+            _constrainX.Fsm.GetFsmFloat("Edge L").Value = 70f;
+            _constrainX.Fsm.GetFsmFloat("Edge R").Value = 103f;
             
-            _control.Fsm.GetFsmFloat("Left X").Value = ArenaInfo.LeftX + 2;
-            _control.Fsm.GetFsmFloat("Right X").Value = ArenaInfo.RightX - 2;
+            _control.Fsm.GetFsmFloat("Left X").Value = 72f;
+            _control.Fsm.GetFsmFloat("Right X").Value = 101f;
 
             _control.GetAction<GGCheckIfBossScene>("Level Check").regularSceneEvent = _control.Fsm.Events.First(@event => @event.Name == "3");
 

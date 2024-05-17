@@ -1,3 +1,7 @@
+using Vasi;
+using HutongGames.PlayMaker.Actions;
+using Random = UnityEngine.Random;
+
 namespace PantheonOfRegions.Behaviours
 {
     internal class Galien : MonoBehaviour
@@ -10,7 +14,7 @@ namespace PantheonOfRegions.Behaviours
         {
             _movement = gameObject.LocateMyFSM("Movement");
 
-            _hammer = Instantiate(CustomTrial.GameObjects["hammer"]);
+            _hammer = Instantiate(PantheonOfRegions.GameObjects["hammer"]);
             _hammer.transform.SetPosition2D(transform.position);
             _hammer.LocateMyFSM("Attack").Fsm.GetFsmGameObject("Ghost Warrior Galien").Value = gameObject;
             _hammer.AddComponent<GalienHammer>();
@@ -47,8 +51,8 @@ namespace PantheonOfRegions.Behaviours
 
         private Vector3 RandomVector3()
         {
-            float x = Random.Range(ArenaInfo.LeftX, ArenaInfo.RightX);
-            float y = Random.Range(ArenaInfo.BottomY, ArenaInfo.TopY);
+            float x = Random.Range(71f, 117f);
+            float y = Random.Range(5f, 18f);
             float z = 0.006f;
 
             return new Vector3(x, y, z);
@@ -68,10 +72,10 @@ namespace PantheonOfRegions.Behaviours
 
         private IEnumerator Start()
         {
-            _attack.Fsm.GetFsmFloat("Floor Y").Value = ArenaInfo.BottomY;
-            _attack.Fsm.GetFsmFloat("Slam Y").Value = ArenaInfo.BottomY + 0.4f;
-            _attack.Fsm.GetFsmFloat("Wall L X").Value = ArenaInfo.LeftX;
-            _attack.Fsm.GetFsmFloat("Wall R X").Value = ArenaInfo.RightX;
+            _attack.Fsm.GetFsmFloat("Floor Y").Value = 5f;
+            _attack.Fsm.GetFsmFloat("Slam Y").Value = 5.4f;
+            _attack.Fsm.GetFsmFloat("Wall L X").Value = 71f;
+            _attack.Fsm.GetFsmFloat("Wall R X").Value = 117f;
 
             _control.GetAction<SetVector3XYZ>("Init").x = transform.position.x;
 

@@ -1,3 +1,6 @@
+using Vasi;
+using HutongGames.PlayMaker.Actions;
+
 namespace PantheonOfRegions.Behaviours
 {
     internal class Flukemarm : MonoBehaviour
@@ -13,7 +16,7 @@ namespace PantheonOfRegions.Behaviours
         {
             _mother.SetState("Init");
 
-            GameObject hatcherCage = Instantiate(CustomTrial.GameObjects["Hatcher Cage"], transform.position, Quaternion.identity);
+            GameObject hatcherCage = Instantiate(PantheonOfRegions.GameObjects["Hatcher Cage"], transform.position, Quaternion.identity);
             hatcherCage.SetActive(true);
             foreach (var collider in hatcherCage.GetComponents<BoxCollider2D>())
             {

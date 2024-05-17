@@ -1,3 +1,4 @@
+using HutongGames.PlayMaker.Actions;
 using Vasi;
 
 namespace PantheonOfRegions.Behaviours
@@ -39,7 +40,7 @@ namespace PantheonOfRegions.Behaviours
             yield return new WaitUntil(() =>
             {
                 transform.Translate(Vector3.down * 25 * Time.deltaTime);
-                return transform.position.y <= ArenaInfo.BottomY - 10;
+                return transform.position.y <= -5f;
             });
 
             Destroy(gameObject);
