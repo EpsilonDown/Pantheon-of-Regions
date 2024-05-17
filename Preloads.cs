@@ -1,19 +1,10 @@
-using HutongGames.PlayMaker.Actions;
-
 namespace PantheonOfRegions;
-
-public sealed partial class PantheonOfRegions {
-
-    private static GameObject? MarmuPrefab = null;
-    private static GameObject? HuPrefab = null;
-    private static GameObject? RingPrefab = null;
-    private static GameObject? HivePrefab = null;
-	
-    private static GameObject? BossInstance = null;
-	private static GameObject? RingInstance = null;
-
+public sealed partial class PantheonOfRegions 
+{
 
 	public List<(string, string)> preloads = new();
+    public static Dictionary<string, GameObject> GameObjects = new();
+
     private Dictionary<string, (string, string)> _preloadDictionary = new()
         {
             #region
@@ -29,34 +20,31 @@ public sealed partial class PantheonOfRegions {
             ["xero"] = ("GG_Ghost_Xero", "Warrior/Ghost Warrior Xero"),
             ["greyprincezote"] = ("GG_Grey_Prince_Zote", "Grey Prince"),
             ["hiveknight"] = ("GG_Hive_Knight", "Battle Scene/Hive Knight"),
-	    ["hornetprotector"] = ("GG_Hornet_1", "Boss Holder/Hornet Boss 1"),
+            ["hornetprotector"] = ("GG_Hornet_1", "Boss Holder/Hornet Boss 1"),
             ["lostkin"] = ("GG_Lost_Kin", "Lost Kin"),
             ["soulwarrior"] = ("GG_Mage_Knight", "Mage Knight"),
-            ["nosk"] = ("GG_Nosk", "Mimic Spider"),
+            ["galien"] = ("GG_Ghost_Galien", "Warrior/Ghost Warrior Galien"),
+            ["hammer"] = ("GG_Ghost_Galien", "Warrior/Galien Hammer"),
             ["oblobble"] = ("GG_Oblobbles", "Mega Fat Bee"),
             ["sheo"] = ("GG_Painter", "Battle Scene/Sheo Boss"),
             ["greatnailsagesly"] = ("GG_Sly", "Battle Scene/Sly Boss"),
             ["hatchercage"] = ("GG_Flukemarm", "Hatcher Cage (2)"),
             ["sibling"] = ("Abyss_15", "Shade Sibling (14)"),
-            #endregion
-        };
-	
-	foreach (KeyValuePair<string, string> Boss in _preloadDictionary)
-	{
-		preloads.Add(_preloadDictionary[Boss]);
-        GameObjects.Add(Boss, null);
-	}
-		
-	private GameObject SpawnBoss(string Boss, Vector2 spawnPoint) 
+            ["hatchercage"] = ("GG_Flukemarm", "Hatcher Cage (2)"),
+        #endregion
+    };
+    private List<(string, string)> GetEnemyPreloads()
     {
-		GameObject boss = Instantiate(PantheonOfRegions.GameObjects[Boss], spawnPoint, Quaternion.identity);
-        enemy.SetActive(false);
-        enemy.AddComponent<EnemyTracker>();
-        var hm = enemy.GetComponent<HealthManager>();
-        hm.SetGeoSmall(0);
-        hm.SetGeoMedium(0);
-        hm.SetGeoLarge(0);
-
-        return boss;
+        foreach (KeyValuePair<string, (string, string)> boss in _preloadDictionary)
+        {
+            preloads.Add(boss.Value);
+            GameObjects.Add(boss.Key, null);
+        }
+        return preloads;
+    }
+    public override List<(string, string)> GetPreloadNames()
+    {
+        var preloads = GetEnemyPreloads();
+        return preloads;
     }
 }
