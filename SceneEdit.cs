@@ -42,7 +42,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "Howlers").HP = 1500;
                     }, 2);
                 break;
-			
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Mega_Moss_Charger":
         	//Moss Charger+Hornet 1
                 running = true;
@@ -58,7 +58,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "Ambushers").HP = 1380;
                     }, 2);
                 break;
-			
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Failed_Champion":
         	//Failed Champion + Mawlek
                 running = true;
@@ -75,7 +75,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "Crossroads").HP = 1800;
                     }, 2); */
                 break;
-		
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Mantis_Lords_V":
 		//Sisters of Battle + Hu
                 running = true;
@@ -95,7 +95,7 @@ public sealed partial class BossAdder : MonoBehaviour
                                 BossSceneController.Instance.BossLevel == 0 ? 2850 : 3650;
                     }, 4);
                 break;
-			
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Crystal_Guardian_2":
         		//Crystal Guardian + Xero
 				//Different region but close enough
@@ -112,7 +112,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "guardians").HP = 1300;
                     }, 2);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Soul_Tyrant":
         	//Soul Warrior + Knight
                 running = true;
@@ -128,7 +128,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "soulmasters").HP = 1650;
                     }, 2);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Traitor_Lord":
                 //Traitor Lord + Marmu
                 running = true;
@@ -147,11 +147,12 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "Queen's Tributes").HP = 1300;
 					}, 0);
                 break;
-			
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Nailmasters":
         		//ALL Nailmasters!!!!
         		running = true;
-				GameObject Sheo = SpawnBoss("sheo", new Vector2 (50.0f,8.0f));
+				GameObject Sheo = SpawnBoss("sheo", new Vector2 (45f,6.4f));
+				GameObject Painting = SpawnBoss("painting", new Vector3 (47.8f, 6.4f,2));
 				GameObject Oro = GameObject.Find("Brothers/Oro");
 				GameObject Mato = GameObject.Find("Brothers/Mato");
                 Oro
@@ -159,13 +160,14 @@ public sealed partial class BossAdder : MonoBehaviour
                     .InsertCustomAction("Recovery Roar", () =>
                     {
                         Sheo.SetActive(true);
+						Painting.SetActive(true);
                         new[] { "Brothers/Oro", "Brothers/Mato" }
                         .Map(s => GameObject.Find(s)).Append(Sheo)
                         .ShareHealth(name: "nailmasters").HP = 1650;
                     }, 0);
                 break;
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-				
 			case "GG_Uumuu_V":
 				//Uuwuu + No eyes
         		running = true;
@@ -181,8 +183,8 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "blinders").HP = 1000;
                     }, 2);
                 break;
-
-				
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Nosk_V":
         	//Nosk + Galien
                 running = true;
@@ -200,7 +202,8 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "blinders").HP = 1330;
                     }, 2);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 			case "GG_White_Defender":
         	//Flukemarm + White Defender (Not the other meaning)
                 running = true;
@@ -219,7 +222,8 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "waterways").HP = 2100;
                     }, 2);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 			case "GG_Hornet_2":
                 //Hive Knight + Hornet
                 running = true;
@@ -237,6 +241,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "stinger knights").HP = 1650;
                     }, 2);
                 break;
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			case "GG_God_Tamer":
         	//God Tamer + Obblelobles
@@ -256,13 +261,16 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "colosseum champions").HP = 1200;
                     }, 0);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 			case "GG_Watcher_Knights":
         	//Collector + Watcher knights
                 running = true;
 				GameObject Collector = SpawnBoss("collector", new Vector2 (60.0f,30.0f));
 				GameObject WatcherKnight = GameObject.Find("Battle Control/Black Knight 1");
 				break;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 				
 			case "GG_Gruz_Mother":
         	//Gruz + Sly
@@ -280,7 +288,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "lord of flies").HP = 1700;
                     }, 2);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Grimm_Nightmare":
         	//NKG + Zote
                 running = true;
@@ -296,7 +304,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "reapers").HP = 2600;
                     }, 2);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Hollow_Knight":
         	//PV + Lost Kin
                 running = true;
@@ -314,7 +322,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "void vessels").HP = 2800;
                     }, 2);
                 break;
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Radiance":
 				//Absrad + Markoth + Seer
 				running = true;
