@@ -80,8 +80,8 @@ public sealed partial class BossAdder : MonoBehaviour
 		//Sisters of Battle + Hu
                 running = true;
 				GameObject ElderHu = SpawnBoss("elderhu", new Vector2 (30.0f,15.0f));
-
                 GameObject battle = next.GetRootGameObjects().First(go => go.name == "Mantis Battle");
+				
                 battle.Child("Mantis Lord Throne 2")
                     .LocateMyFSM("Mantis Throne Main")
                     .InsertCustomAction("Roar 2", () => {
@@ -102,15 +102,16 @@ public sealed partial class BossAdder : MonoBehaviour
                 running = true;
 				GameObject Xero = SpawnBoss("xero", new Vector2 (30.0f,15.0f));
 				GameObject EnragedGuardian = GameObject.Find("Battle Scene/Zombie Beam Miner Rematch");
-                EnragedGuardian
+				Xero!.SetActive(true);
+                /* EnragedGuardian
                     .LocateMyFSM("Beam Miner")
                     .InsertCustomAction("Battle Init", () =>
                     {
-                        Xero!.SetActive(true);
+                        
                         new[] { "Battle Scene/Zombie Beam Miner Rematch" }
                         .Map(s => GameObject.Find(s)).Append(Xero)
                         .ShareHealth(name: "guardians").HP = 1300;
-                    }, 2);
+                    }, 2); */
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Soul_Tyrant":
@@ -181,7 +182,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         new[] { "Mega Jellyfish GG" }
                         .Map(s => GameObject.Find(s)).Append(NoEyes)
                         .ShareHealth(name: "blinders").HP = 1000;
-                    }, 2);
+                    }, 0);
                 break;
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,15 +201,16 @@ public sealed partial class BossAdder : MonoBehaviour
                         new[] { "Mimic Spider" }
                         .Map(s => GameObject.Find(s)).Append(Galien)
                         .ShareHealth(name: "blinders").HP = 1330;
-                    }, 2);
+                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			case "GG_White_Defender":
         	//Flukemarm + White Defender (Not the other meaning)
                 running = true;
-				GameObject Flukemarm = SpawnBoss("flukemarm", new Vector2 (75.0f,15.0f));
-                GameObject Hatchercage = SpawnBoss("hatchercage", new Vector2(75.0f, 15.0f));
+				GameObject Flukemarm = SpawnBoss("flukemarm", new Vector2 (75.0f,40.0f));
+                GameObject Hatchercage = SpawnBoss("hatchercage", new Vector2(75.0f, 40.0f));
+				
                 Flukemarm.SetActive(true);
                 Hatchercage.SetActive(true);
                 GameObject WhiteDefender = GameObject.Find("White Defender");
@@ -220,7 +222,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         new[] { "White Defender" }
                         .Map(s => GameObject.Find(s)).Append(Flukemarm)
                         .ShareHealth(name: "waterways").HP = 2100;
-                    }, 2);
+                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -239,7 +241,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         new[] { "Boss Holder/Hornet Boss 2" }
                         .Map(s => GameObject.Find(s)).Append(HiveKnight)
                         .ShareHealth(name: "stinger knights").HP = 1650;
-                    }, 2);
+                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -247,7 +249,6 @@ public sealed partial class BossAdder : MonoBehaviour
         	//God Tamer + Obblelobles
                 running = true;
 				GameObject Oblobble1 = SpawnBoss("oblobble", new Vector2 (90.0f,10.0f));
-				GameObject Oblobble2 = SpawnBoss("oblobble", new Vector2 (110.0f,10.0f));
                 GameObject Lobster = GameObject.Find("Entry Object/Lobster");
                 GameObject GodTamer = GameObject.Find("Entry Object/Lancer");
                 Lobster
@@ -255,9 +256,8 @@ public sealed partial class BossAdder : MonoBehaviour
                     .InsertCustomAction("Wake", () =>
                     {
                         Oblobble1.SetActive(true);
-                        Oblobble2.SetActive(true);
                         new[] { "Entry Object/Lobster", "Entry Object/Lancer" }
-                        .Map(s => GameObject.Find(s)).Append(Oblobble1).Append(Oblobble2)
+                        .Map(s => GameObject.Find(s)).Append(Oblobble1)
                         .ShareHealth(name: "colosseum champions").HP = 1200;
                     }, 0);
                 break;
@@ -286,7 +286,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         new[] { "_Enemies/Giant Fly" }
                         .Map(s => GameObject.Find(s)).Append(Sly)
                         .ShareHealth(name: "lord of flies").HP = 1700;
-                    }, 2);
+                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Grimm_Nightmare":
@@ -294,24 +294,26 @@ public sealed partial class BossAdder : MonoBehaviour
                 running = true;
 				GameObject Zote = SpawnBoss("greyprincezote", new Vector2 (100.0f,10.0f));
 				GameObject NKG = GameObject.Find("Grimm Control/Nightmare Grimm Boss");
+				Zote.SetActive(true);
+				/*
                 NKG
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Init", () =>
                     {
-                        Zote.SetActive(true);
+                        
                         new[] { "Grimm Control/Nightmare Grimm Boss" }
                         .Map(s => GameObject.Find(s)).Append(Zote)
                         .ShareHealth(name: "reapers").HP = 2600;
-                    }, 2);
+                    }, 0); */
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Hollow_Knight":
         	//PV + Lost Kin
                 running = true;
 				GameObject LostKin = SpawnBoss("lostkin", new Vector2 (50.0f,30.0f));
-				GameObject Sibling = SpawnBoss("sibling", new Vector2 (50.0f,10.0f));
-                
+				GameObject Sibling = SpawnBoss("sibling", new Vector2 (50.0f,30.0f));
                 GameObject PureVessel = GameObject.Find("Battle Scene/HK Prime");
+				
                 PureVessel
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Intro Roar", () =>
@@ -320,7 +322,7 @@ public sealed partial class BossAdder : MonoBehaviour
                         new[] { "Battle Scene/HK Prime" }
                         .Map(s => GameObject.Find(s)).Append(LostKin)
                         .ShareHealth(name: "void vessels").HP = 2800;
-                    }, 2);
+                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Radiance":
