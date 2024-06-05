@@ -27,6 +27,7 @@ public sealed partial class PantheonOfRegions
             ["hammer"] = ("GG_Ghost_Galien", "Warrior/Galien Hammer"),
             ["oblobble"] = ("GG_Oblobbles", "Mega Fat Bee"),
             ["sheo"] = ("GG_Painter", "Battle Scene/Sheo Boss"),
+	    ["painting"] = ("GG_Painter", "painting_nailsmith_0001_paint2")
             ["greatnailsagesly"] = ("GG_Sly", "Battle Scene/Sly Boss"),
             ["hatchercage"] = ("GG_Flukemarm", "Hatcher Cage (2)"),
             ["sibling"] = ("Abyss_15", "Shade Sibling (14)"),
