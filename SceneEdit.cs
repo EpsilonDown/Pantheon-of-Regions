@@ -209,10 +209,8 @@ public sealed partial class BossAdder : MonoBehaviour
         	//Flukemarm + White Defender (Not the other meaning)
                 running = true;
 				GameObject Flukemarm = SpawnBoss("flukemarm", new Vector2 (75.0f,40.0f));
-                GameObject Hatchercage = SpawnBoss("hatchercage", new Vector2(75.0f, 40.0f));
 				
                 Flukemarm.SetActive(true);
-                Hatchercage.SetActive(true);
                 GameObject WhiteDefender = GameObject.Find("White Defender");
                 WhiteDefender
                     .LocateMyFSM("Dung Defender")
