@@ -14,7 +14,7 @@ namespace PantheonOfRegions.Behaviours
 
         private IEnumerator Start()
         {
-            _control.SetState("Init");
+            //_control.SetState("Init");
 
             _control.Fsm.GetFsmBool("Final Rage").Value = true;
             
