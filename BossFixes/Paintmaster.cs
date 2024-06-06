@@ -20,7 +20,7 @@ namespace PantheonOfRegions.Behaviours
             _sheo.SetState("Init");
 
             yield return new WaitWhile(() => _sheo.ActiveStateName != "Painting");
-
+            _sheoControl.RemoveTransition("Painting", "Look");
             _sheo.SetState("Battle Start");
         }
     }
