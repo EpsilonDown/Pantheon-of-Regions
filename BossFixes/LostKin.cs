@@ -15,7 +15,7 @@ namespace PantheonOfRegions.Behaviours
 
         private IEnumerator Start()
         {
-            _control.SetState("Pause");
+            //_control.SetState("Pause");
 
             _control.Fsm.GetFsmFloat("Air Dash Height").Value = 6 + 3;
             _control.Fsm.GetFsmFloat("Left X").Value = 29;
@@ -36,7 +36,7 @@ namespace PantheonOfRegions.Behaviours
 
             yield return new WaitUntil(() => _control.ActiveStateName == "Intro Fall");
 
-            _control.SetState("Roar End");
+            //_control.SetState("Roar End");
         }
     }
 }
