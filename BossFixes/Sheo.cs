@@ -1,4 +1,4 @@
-namespace PantheonOfRegions
+namespace PantheonOfRegions.Behaviours
 {
     public class Sheo : MonoBehaviour
     {
