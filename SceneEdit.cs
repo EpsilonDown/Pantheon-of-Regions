@@ -1,12 +1,14 @@
-using JetBrains.Annotations;
-using Osmi.Game;
+using HutongGames.PlayMaker.Actions;
+using System.Security.Policy;
+using tk2dRuntime.TileMap;
+using UnityEngine;
 
 namespace PantheonOfRegions;
 public sealed partial class BossAdder : MonoBehaviour
 {
     private static bool running = false;
-
-	public static void EditScene(Scene prev, Scene next)
+   
+    public static void EditScene(Scene prev, Scene next)
     {
 
 
@@ -152,20 +154,8 @@ public sealed partial class BossAdder : MonoBehaviour
 			case "GG_Nailmasters":
         		//ALL Nailmasters!!!!
         		running = true;
-				GameObject Sheo = SpawnBoss("sheo", new Vector2 (45f,6.4f));
-				GameObject Painting = SpawnBoss("painting", new Vector3 (47.8f, 6.4f,2));
 				GameObject Oro = GameObject.Find("Brothers/Oro");
 				GameObject Mato = GameObject.Find("Brothers/Mato");
-                Oro
-                    .LocateMyFSM("nailmaster")
-                    .InsertCustomAction("Recovery Roar", () =>
-                    {
-                        Sheo.SetActive(true);
-						Painting.SetActive(true);
-                        new[] { "Brothers/Oro", "Brothers/Mato" }
-                        .Map(s => GameObject.Find(s)).Append(Sheo)
-                        .ShareHealth(name: "nailmasters").HP = 1650;
-                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -189,7 +179,7 @@ public sealed partial class BossAdder : MonoBehaviour
 			case "GG_Nosk_V":
         	//Nosk + Galien
                 running = true;
-				GameObject Galien = SpawnBoss("galien", new Vector2 (100.0f,100.0f));
+				GameObject Galien = SpawnBoss("galien", new Vector2 (30.0f,30.0f));
 				GameObject Hammer = SpawnBoss("hammer", new Vector2 (30.0f,30.0f));
 				GameObject Nosk = GameObject.Find("Mimic Spider");
                 Nosk
@@ -208,15 +198,13 @@ public sealed partial class BossAdder : MonoBehaviour
 			case "GG_White_Defender":
         	//Flukemarm + White Defender (Not the other meaning)
                 running = true;
-				GameObject Flukemarm = SpawnBoss("flukemarm", new Vector2 (75.0f,40.0f));
-				
-                Flukemarm.SetActive(true);
+				GameObject Flukemarm = SpawnBoss("flukemarm", new Vector2 (75.0f,20.0f));
                 GameObject WhiteDefender = GameObject.Find("White Defender");
                 WhiteDefender
                     .LocateMyFSM("Dung Defender")
                     .InsertCustomAction("Intro Roar", () =>
                     {
-                        
+                        Flukemarm.SetActive(true);
                         new[] { "White Defender" }
                         .Map(s => GameObject.Find(s)).Append(Flukemarm)
                         .ShareHealth(name: "waterways").HP = 2100;
@@ -307,20 +295,28 @@ public sealed partial class BossAdder : MonoBehaviour
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Hollow_Knight":
         	//PV + Lost Kin
+                
                 running = true;
-				GameObject LostKin = SpawnBoss("lostkin", new Vector2 (50.0f,30.0f));
-				GameObject Sibling = SpawnBoss("sibling", new Vector2 (50.0f,30.0f));
+				GameObject LostKin = SpawnBoss("lostkin", new Vector2 (35.0f,20.0f));
+                
+
+
+                GameObject sibling = SpawnBoss("sibling", new Vector2 (40.0f,15.0f));
                 GameObject PureVessel = GameObject.Find("Battle Scene/HK Prime");
-				
+                
+
                 PureVessel
                     .LocateMyFSM("Control")
-                    .InsertCustomAction("Intro Roar", () =>
+                    .InsertCustomAction("Intro 4", () =>
                     {
                         LostKin!.SetActive(true);
                         new[] { "Battle Scene/HK Prime" }
                         .Map(s => GameObject.Find(s)).Append(LostKin)
                         .ShareHealth(name: "void vessels").HP = 2800;
-                    }, 0);
+                    }, 1);
+
+
+
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Radiance":
