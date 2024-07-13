@@ -27,12 +27,12 @@ namespace PantheonOfRegions.Behaviours
             _control.GetAction<SetDamageHeroAmount>("Set Damage", 1).damageDealt = 1;
             _control.GetAction<SetDamageHeroAmount>("Set Damage", 2).damageDealt = 1;
 
-            _control.SetState("Pause");
+            //_control.SetState("Pause");
 
-            yield return new WaitUntil(() => _control.ActiveStateName == "Dormant");
+            //yield return new WaitUntil(() => _control.ActiveStateName == "Dormant");
 
-            GetComponent<HealthManager>().IsInvincible = false;
-            _control.SetState("Activate");
+            //GetComponent<HealthManager>().IsInvincible = false;
+            //_control.SetState("Activate");
         }
     }
 }
