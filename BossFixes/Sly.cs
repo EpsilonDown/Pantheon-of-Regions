@@ -29,7 +29,6 @@ namespace PantheonOfRegions.Behaviours
             _control.GetState("Stun Wait").AddMethod(() => _control.SendEvent("READY"));
             _control.GetState("Grabbing").AddMethod(() => _control.SendEvent("GRABBED"));
             
-            yield return new WaitWhile(() => _control.ActiveStateName != "Docile");
 
             GameObject spinTink = new GameObject("Spin Tink");
             var collider = spinTink.AddComponent<CircleCollider2D>();
@@ -38,8 +37,6 @@ namespace PantheonOfRegions.Behaviours
             collider.radius = 3;
             spinTink.transform.SetParent(gameObject.transform, false);
             _control.Fsm.GetFsmGameObject("Spin Tink").Value = spinTink;
-
-            _control.SetState("Battle Start");
         }
 
         private IEnumerator TweenOut()
