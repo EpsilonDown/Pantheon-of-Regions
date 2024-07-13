@@ -14,13 +14,13 @@ namespace PantheonOfRegions.Behaviours
 
         private IEnumerator Start()
         {
-            _control.SetState("Init");
+            //_control.SetState("Init");
 
-            _control.GetState("Wake Land").AddMethod(() => _control.SetState("Start"));
+            //_control.GetState("Wake Land").AddMethod(() => _control.SetState("Start"));
             
-            yield return new WaitWhile(() => _control.ActiveStateName != "Dormant");
+            //yield return new WaitWhile(() => _control.ActiveStateName != "Dormant");
             
-            _control.SendEvent("WAKE");
+            //_control.SendEvent("WAKE");
         }
 
         private void Update()
