@@ -29,7 +29,7 @@ namespace PantheonOfRegions.Behaviours
                 _movement.Fsm.GetFsmVector3($"P{index}").Value = RandomVector3();
             }
             
-            _yLimit.GetAction<FloatClamp>("Limit").maxValue = 15f;
+            _yLimit.GetAction<FloatClamp>("Limit").maxValue = 20f;
         }
         
         private Vector3 RandomVector3()
