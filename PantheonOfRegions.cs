@@ -34,7 +34,7 @@ namespace PantheonOfRegions
 
             foreach (KeyValuePair<string, GameObject> pair in gameObjects)
                 GameObjects[pair.Key] = pair.Value;
-
+            
         }
 
 
@@ -81,9 +81,9 @@ namespace PantheonOfRegions
             "CustomBossDoorSuper" => "Pantheon of",
             "CustomBossDoorTitle" => "Regions",
             "CustomBossDoorDesc" => "Fight Gods Attuned through the Regions",
-	    "VENGEFLY_SUPER" => "Howling",
-            "VENGEFLY_MAIN" => "Ascenders",
-	    "MEGA_MOSS_SUPER" => "Green",
+	        "VENGEFLY_SUPER" => "Cliff",
+            "VENGEFLY_MAIN" => "Howlers",
+	        "MEGA_MOSS_SUPER" => "Green",
             "MEGA_MOSS_MAIN" => "Ambushers",
             "FALSE_KNIGHT_DREAM_MAIN" => "Crossroads",
             "FALSE_KNIGHT_DREAM_SUB" => "Dominators",
@@ -97,18 +97,20 @@ namespace PantheonOfRegions
             "TRAITOR_LORD_SUB" => "Tributes",
             "TEMP_NM_SUPER" => "Family",
             "TEMP_NM_MAIN" => "Nailmasters",
-            "MEGA_JELLY_MAIN" => "Blind Protectors",
-            "MIMIC_SPIDER_MAIN" => "Stalking Warriors",
+            "MEGA_JELLY_MAIN" => "Blind",
+            "MEGA_JELLY_SUB" => "Protectors",
+            "MIMIC_SPIDER_MAIN" => "Deepnest",
+            "MIMIC_SPIDER_SUB" => "Stalkers",
             "WHITE_DEFENDER_MAIN" => "Waterways",
             "WHITE_DEFENDER_SUB" => "Guardians",
             "HORNET_MAIN" => "Stinger Knights",
             "LOBSTER_LANCER_C_SUPER" => "Champions of",
             "LOBSTER_LANCER_C_MAIN" => "Colosseum",
-	    "BIGFLY_SUPER" => "Lord of",
+	        "BIGFLY_SUPER" => "Lord of",
             "BIGFLY_MAIN" => "Flies",
-            
-            "GRIMM_NIGHTMARE_SUPER" => "Nightmare",
-            "GRIMM_NIGHTMARE_MAIN" => "Incarnates",
+
+            "NIGHTMARE_GRIMM_SUPER" => "Nightmare",
+            "NIGHTMARE_GRIMM_MAIN" => "Incarnates",
             "HK_PRIME_MAIN" => "Void Vessels",
             "ABSOLUTE_RADIANCE_MAIN" => "RADIANCE",
             "ABOLUTE_RADIANCE_SUPER" => "Mother Of Moths",
@@ -131,8 +133,8 @@ namespace PantheonOfRegions
             }
 			Log("Set Custom Door");
 		}
-  
-		public void Unload()
+       
+    public void Unload()
         {
 			UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= AddDoor;
 			ModHooks.GetPlayerVariableHook -= ChangeCustomDoorVar;

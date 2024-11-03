@@ -1,13 +1,10 @@
+using PantheonOfRegions.Behaviours;
 using HutongGames.PlayMaker.Actions;
-using System.Security.Policy;
-using tk2dRuntime.TileMap;
-using UnityEngine;
-
 namespace PantheonOfRegions;
 public sealed partial class BossAdder : MonoBehaviour
 {
     private static bool running = false;
-   
+    private static GameObject[] loadedboss = null;
     public static void EditScene(Scene prev, Scene next)
     {
 
@@ -15,13 +12,14 @@ public sealed partial class BossAdder : MonoBehaviour
         GameObject SpawnBoss(string Boss, Vector2 spawnPoint)
         {
             GameObject boss = Instantiate(PantheonOfRegions.GameObjects[Boss], spawnPoint, Quaternion.identity);
+            GameObject.DontDestroyOnLoad(boss);
             boss.AddComponent<EnemyTracker>();
             boss.SetActive(false);
-            GameObject.DontDestroyOnLoad(boss);
+            boss.tag = "custom";
             var hm = boss.GetComponent<HealthManager>();
-            hm.SetGeoSmall(0);
-            hm.SetGeoMedium(0);
-            hm.SetGeoLarge(0);
+            //hm.SetGeoSmall(0);
+            //hm.SetGeoMedium(0);
+            //hm.SetGeoLarge(0);
 
             return boss;
         }
@@ -29,7 +27,7 @@ public sealed partial class BossAdder : MonoBehaviour
         switch (next.name)
         {
 			case "GG_Vengefly_V":
-        		//Vengefly Kings + Gorb
+        		//Vengefly Kings + Gorb -> Minor Fix Needed
                 running = true;
 				GameObject Gorb = SpawnBoss("gorb", new Vector2 (43.0f,20.0f));
 
@@ -41,12 +39,12 @@ public sealed partial class BossAdder : MonoBehaviour
                         new[] { "Giant Buzzer Col", "Giant Buzzer Col (1)" }
                         .Select(s => GameObject.Find(s))
                         .Append(Gorb)
-                        .ShareHealth(name: "Howlers").HP = 1500;
+                        .ShareHealth(name: "Howlers").HP = 1200;
                     }, 2);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Mega_Moss_Charger":
-        	//Moss Charger+Hornet 1
+        	//Moss Charger+Hornet 1 -> DONE
                 running = true;
 				GameObject Hornet = SpawnBoss("hornetprotector", new Vector2 (60.0f,10.0f));
 				GameObject MassiveMossCharger = GameObject.Find("Mega Moss Charger");
@@ -57,33 +55,35 @@ public sealed partial class BossAdder : MonoBehaviour
                         Hornet.SetActive(true);
                         new[] { "Mega Moss Charger" }
                         .Map(s => GameObject.Find(s)).Append(Hornet)
-                        .ShareHealth(name: "Ambushers").HP = 1380;
+                        .ShareHealth(name: "Ambushers").HP = 1000;
                     }, 2);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Failed_Champion":
-        	//Failed Champion + Mawlek
+        	//Failed Champion + Mawlek - Minor Fix Needed
                 running = true;
 				GameObject Mawlek = SpawnBoss("broodingmawlek", new Vector2 (60.0f,50.0f));
 				GameObject FailedChampion = GameObject.Find("False Knight Dream");
-                Mawlek.SetActive(true);
-                /* FailedChampion
+                FailedChampion.AddComponent<EnemyTracker>();
+                
+                FailedChampion
                     .LocateMyFSM("FalseyControl")
                     .InsertCustomAction("Start Fall", () =>
                     {
-                        
-                        new[] { "False Knight Dream" }
-                        .Map(s => GameObject.Find(s)).Append(Mawlek)
-                        .ShareHealth(name: "Crossroads").HP = 1800;
-                    }, 2); */
+                        Mawlek.SetActive(true);
+                        new[] { FailedChampion, Mawlek }
+                        .ShareHealth(name: "Crossroads").HP = 1430;
+                    }, 2);
+
+
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Mantis_Lords_V":
-		//Sisters of Battle + Hu
+		//Sisters of Battle + Hu - Minor Fix?
                 running = true;
 				GameObject ElderHu = SpawnBoss("elderhu", new Vector2 (30.0f,15.0f));
                 GameObject battle = next.GetRootGameObjects().First(go => go.name == "Mantis Battle");
-				
+                ElderHu.Child("Target").transform.position = new Vector2(30f,12f);
                 battle.Child("Mantis Lord Throne 2")
                     .LocateMyFSM("Mantis Throne Main")
                     .InsertCustomAction("Roar 2", () => {
@@ -94,26 +94,26 @@ public sealed partial class BossAdder : MonoBehaviour
                             .Map(path => battle.Child(path)!)
                             .Append(ElderHu!)
                             .ShareHealth(name: "Alliance Of Battle").HP =
-                                BossSceneController.Instance.BossLevel == 0 ? 2850 : 3650;
+                                BossSceneController.Instance.BossLevel == 0 ? 2500 : 3500;
                     }, 4);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Crystal_Guardian_2":
         		//Crystal Guardian + Xero
-				//Different region but close enough
+				//Different region but close enough -> Done?
                 running = true;
-				GameObject Xero = SpawnBoss("xero", new Vector2 (30.0f,15.0f));
+				GameObject Xero = SpawnBoss("xero", new Vector2 (30.0f,17.0f));
 				GameObject EnragedGuardian = GameObject.Find("Battle Scene/Zombie Beam Miner Rematch");
-				Xero!.SetActive(true);
-                /* EnragedGuardian
-                    .LocateMyFSM("Beam Miner")
+                
+                EnragedGuardian
+                    .LocateMyFSM("Beam Miner") 
                     .InsertCustomAction("Battle Init", () =>
                     {
-                        
+                        Xero!.SetActive(true);
                         new[] { "Battle Scene/Zombie Beam Miner Rematch" }
                         .Map(s => GameObject.Find(s)).Append(Xero)
-                        .ShareHealth(name: "guardians").HP = 1300;
-                    }, 2); */
+                        .ShareHealth(name: "restless").HP = 1000;
+                    }, 2);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Soul_Tyrant":
@@ -126,9 +126,8 @@ public sealed partial class BossAdder : MonoBehaviour
                     .InsertCustomAction("Roar", () =>
                     {
                         SoulWarrior.SetActive(true);
-                        new[] { "Dream Mage Lord" }
-                        .Map(s => GameObject.Find(s)).Append(SoulWarrior)
-                        .ShareHealth(name: "soulmasters").HP = 1650;
+                        new[] { SoulWarrior, SoulTyrant }
+                        .ShareHealth(name: "soulmasters").HP = 1500;
                     }, 2);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,9 +144,8 @@ public sealed partial class BossAdder : MonoBehaviour
                     .InsertCustomAction("Roar", () =>
                     {
                         Marmu.SetActive(true);
-                        new[] { "Battle Scene/Wave 3/Mantis Traitor Lord" }
-						.Map(s => GameObject.Find(s)).Append(Marmu)
-                        .ShareHealth(name: "Queen's Tributes").HP = 1300;
+                        new[] { TraitorLord, Marmu }
+                        .ShareHealth(name: "Queen's Tributes").HP = 1200;
 					}, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,7 +153,17 @@ public sealed partial class BossAdder : MonoBehaviour
         		//ALL Nailmasters!!!!
         		running = true;
 				GameObject Oro = GameObject.Find("Brothers/Oro");
-				GameObject Mato = GameObject.Find("Brothers/Mato");
+                GameObject Sheo = SpawnBoss("sheo", new Vector2(45.0f, 6.9f));
+                Oro
+                    .LocateMyFSM("nailmaster")
+                    .InsertCustomAction("Init", () =>
+                    {
+                       Sheo!.SetActive(true);
+                       Sheo!.LocateMyFSM("nailmaster_sheo").SetState("Look");
+                        new[] { "Brothers/Oro", "Brothers/Mato" }
+                        .Map(s => GameObject.Find(s)).Append(Sheo)
+                        .ShareHealth(name: "nailmasters").HP = 1000;
+                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -169,28 +177,24 @@ public sealed partial class BossAdder : MonoBehaviour
                     .InsertCustomAction("Init", () =>
                     {
                         NoEyes!.SetActive(true);
-                        new[] { "Mega Jellyfish GG" }
-                        .Map(s => GameObject.Find(s)).Append(NoEyes)
+                        new[] { Uumuu, NoEyes }
                         .ShareHealth(name: "blinders").HP = 1000;
                     }, 0);
                 break;
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Nosk_V":
-        	//Nosk + Galien
+        	//Nosk + Galien - Almost end
                 running = true;
-				GameObject Galien = SpawnBoss("galien", new Vector2 (30.0f,30.0f));
-				GameObject Hammer = SpawnBoss("hammer", new Vector2 (30.0f,30.0f));
+				GameObject Galien = SpawnBoss("galien", new Vector2 (110.0f,10.0f));
 				GameObject Nosk = GameObject.Find("Mimic Spider");
                 Nosk
                     .LocateMyFSM("Mimic Spider")
-                    .InsertCustomAction("Init", () =>
+                    .InsertCustomAction("GG Activate", () =>
                     {
                         Galien!.SetActive(true);
-                        Hammer!.SetActive(true);
-                        new[] { "Mimic Spider" }
-                        .Map(s => GameObject.Find(s)).Append(Galien)
-                        .ShareHealth(name: "blinders").HP = 1330;
+                        new[] { Nosk, Galien }
+                        .ShareHealth(name: "blinders").HP = 1200;
                     }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,65 +209,63 @@ public sealed partial class BossAdder : MonoBehaviour
                     .InsertCustomAction("Intro Roar", () =>
                     {
                         Flukemarm.SetActive(true);
-                        new[] { "White Defender" }
-                        .Map(s => GameObject.Find(s)).Append(Flukemarm)
-                        .ShareHealth(name: "waterways").HP = 2100;
+                        new[] { WhiteDefender, Flukemarm }
+                        .ShareHealth(name: "waterways").HP = 2000;
                     }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			case "GG_Hornet_2":
-                //Hive Knight + Hornet
+                //Hive Knight + Hornet - Done
                 running = true;
 				
-				GameObject HiveKnight = SpawnBoss("hiveknight", new Vector2 (30.0f,30.0f));
-				GameObject HornetSentinel = GameObject.Find("Boss Holder/Hornet Boss 2");
-
+				GameObject HiveKnight = SpawnBoss("hiveknight", new Vector2 (30.0f,35.0f));
+                GameObject HornetSentinel = GameObject.Find("Boss Holder/Hornet Boss 2");
+                HornetSentinel.LocateMyFSM("Control").Fsm.GetFsmBool("Can Barb").Value = true;
                 HornetSentinel
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Init", () =>
                     {
                         HiveKnight.SetActive(true);
-                        new[] { "Boss Holder/Hornet Boss 2" }
-                        .Map(s => GameObject.Find(s)).Append(HiveKnight)
-                        .ShareHealth(name: "stinger knights").HP = 1650;
+                        new[] { HornetSentinel, HiveKnight }
+                        .ShareHealth(name: "stinger knights").HP = 1500;
                     }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			case "GG_God_Tamer":
-        	//God Tamer + Obblelobles
+        	//God Tamer + Obblelobles - Done??
                 running = true;
 				GameObject Oblobble1 = SpawnBoss("oblobble", new Vector2 (90.0f,10.0f));
                 GameObject Lobster = GameObject.Find("Entry Object/Lobster");
                 GameObject GodTamer = GameObject.Find("Entry Object/Lancer");
                 Lobster
                     .LocateMyFSM("Control")
-                    .InsertCustomAction("Wake", () =>
+                    .AddCustomAction("Init", () =>
                     {
                         Oblobble1.SetActive(true);
-                        new[] { "Entry Object/Lobster", "Entry Object/Lancer" }
-                        .Map(s => GameObject.Find(s)).Append(Oblobble1)
+                        new[] { Lobster, GodTamer, Oblobble1 }
                         .ShareHealth(name: "colosseum champions").HP = 1200;
-                    }, 0);
+                    });
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			case "GG_Watcher_Knights":
+			case "GG_Collector":
         	//Collector + Watcher knights
                 running = true;
-				GameObject Collector = SpawnBoss("collector", new Vector2 (60.0f,30.0f));
-				GameObject WatcherKnight = GameObject.Find("Battle Control/Black Knight 1");
-				break;
+                GameObject Collector = GameObject.Find("Battle Scene/Jar Collector");
+                Collector.AddComponent<EnemyTracker>();
+                break;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 				
 			case "GG_Gruz_Mother":
         	//Gruz + Sly
                 running = true;
-				GameObject Sly = SpawnBoss("greatnailsagesly", new Vector2 (98.0f,16.0f));
+				GameObject Sly = SpawnBoss("greatnailsagesly", new Vector2 (98.0f,15.0f));
                 Sly.SetActive(true);
                 GameObject GruzMother = GameObject.Find("_Enemies/Giant Fly");
+                GruzMother.LocateMyFSM("Big Fly Control").GetAction<Wait>("Fly", 3).time.Value = 12f;
                 GruzMother
                     .LocateMyFSM("Big Fly Control")
                     .InsertCustomAction("Init", () =>
@@ -271,26 +273,25 @@ public sealed partial class BossAdder : MonoBehaviour
                         
                         new[] { "_Enemies/Giant Fly" }
                         .Map(s => GameObject.Find(s)).Append(Sly)
-                        .ShareHealth(name: "lord of flies").HP = 1700;
+                        .ShareHealth(name: "fly lords").HP = 1800;
                     }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Grimm_Nightmare":
         	//NKG + Zote
                 running = true;
-				GameObject Zote = SpawnBoss("greyprincezote", new Vector2 (100.0f,10.0f));
+				GameObject Zote = SpawnBoss("greyprincezote", new Vector2 (150.0f,10.0f));
 				GameObject NKG = GameObject.Find("Grimm Control/Nightmare Grimm Boss");
-				Zote.SetActive(true);
-				/*
+
                 NKG
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Init", () =>
                     {
-                        
+                        Zote.SetActive(true);
                         new[] { "Grimm Control/Nightmare Grimm Boss" }
                         .Map(s => GameObject.Find(s)).Append(Zote)
                         .ShareHealth(name: "reapers").HP = 2600;
-                    }, 0); */
+                    }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 			case "GG_Hollow_Knight":
@@ -298,13 +299,8 @@ public sealed partial class BossAdder : MonoBehaviour
                 
                 running = true;
 				GameObject LostKin = SpawnBoss("lostkin", new Vector2 (35.0f,20.0f));
-                
-
-
-                GameObject sibling = SpawnBoss("sibling", new Vector2 (40.0f,15.0f));
                 GameObject PureVessel = GameObject.Find("Battle Scene/HK Prime");
                 
-
                 PureVessel
                     .LocateMyFSM("Control")
                     .InsertCustomAction("Intro 4", () =>
@@ -315,19 +311,40 @@ public sealed partial class BossAdder : MonoBehaviour
                         .ShareHealth(name: "void vessels").HP = 2800;
                     }, 1);
 
-
-
                 break;
-////////////////////////////////////////////////////////////////////////////////////////////////////
-			case "GG_Radiance":
+
+            case "GG_Radiance":
 				//Absrad + Markoth + Seer
 				running = true;
 				GameObject Markoth = SpawnBoss("markoth", new Vector2 (60.0f,25.0f));
                 Markoth.SetActive(true);
                 GameObject AbsoluteRadiance = GameObject.Find("Boss Control/Absolute Radiance");
 				break;
-			
-        default:
+            /* case "GG_Atrium_Roof":
+
+                loadedboss = GameObject.FindGameObjectsWithTag("custom");
+                if (loadedboss != null)
+                {
+                    foreach (GameObject loaded in loadedboss)
+                    {
+                        Destroy(loaded);
+                    }
+                }
+
+                break;
+            case "GG_Workshop":
+
+                loadedboss = GameObject.FindGameObjectsWithTag("custom");
+                if (loadedboss != null)
+                {
+                    foreach (GameObject loaded in loadedboss)
+                    {
+                        Destroy(loaded);
+                    }
+                }
+                break; */
+
+            default:
                 running = false;
                 return;
     	}

@@ -22,6 +22,10 @@ namespace PantheonOfRegions
             {
                 gameObject.AddComponent<BroodingMawlek>();
             }
+            else if (goName.Contains("False Knight Dream"))
+            {
+                gameObject.AddComponent<FailedChampion>();
+            }
             else if (goName.Contains("Jar Collector"))
             {
                 gameObject.AddComponent<TheCollector>();
@@ -62,10 +66,6 @@ namespace PantheonOfRegions
             {
                 gameObject.AddComponent<GreyPrinceZote>();
             }
-            else if (goName.Contains("Lobster"))
-            {
-                gameObject.AddComponent<Lobster>();
-            }
             else if (goName.Contains("Hive Knight"))
             {
                 gameObject.AddComponent<HiveKnight>();
@@ -84,7 +84,7 @@ namespace PantheonOfRegions
             }
             else if (goName.Contains("Sheo Boss"))
             {
-                gameObject.AddComponent<PaintmasterSheo>();
+                gameObject.AddComponent<Sheo>();
             }
             else if (goName.Contains("Sly Boss"))
             {
@@ -93,6 +93,14 @@ namespace PantheonOfRegions
             else if (goName.Contains("Mage Knight"))
             {
                 gameObject.AddComponent<SoulWarrior>();
+            }
+            else if (goName.Contains("Black Knight"))
+            {
+                gameObject.AddComponent<Watcherknight>();
+            }
+            else if (goName.Contains("Shade Sibling"))
+            {
+                gameObject.AddComponent<Sibling>();
             }
             else
             {
