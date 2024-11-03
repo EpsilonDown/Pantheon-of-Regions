@@ -46,6 +46,7 @@ namespace PantheonOfRegions.Behaviours
         }
         private void Start()
         {
+            
             _attacking.SetState(_attacking.Fsm.StartState);
 
             _attacking.GetAction<FloatCompare>("Choose Pos", 1).float2 = 30f - 6f;
@@ -57,7 +58,7 @@ namespace PantheonOfRegions.Behaviours
 
             _attacking.GetAction<SetPosition>("Mega Warp Out").x = HeroController.instance.transform.position.x;
 
-            _attacking.SendEvent("READY");
+            //_attacking.SendEvent("READY");
 
             _attacking.GetState("Place Rings").AddCustomAction(() =>
             {
@@ -87,6 +88,7 @@ namespace PantheonOfRegions.Behaviours
                 PlayMakerFSM ringCtrl = ringTransform.GetComponent<PlayMakerFSM>();
                 ringCtrl.GetAction<FloatCompare>("Down").float2 = 9f;
                 FsmState checkPos = ringCtrl.GetState("Check Pos");
+
                 //checkPos.GetAction<FloatCompare>(1).lessThan = new FsmEvent("RESET");
                 //checkPos.GetAction<FloatCompare>(2).greaterThan = new FsmEvent("RESET");
                 //checkPos.RemoveTransition("CANCEL");

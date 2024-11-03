@@ -79,14 +79,16 @@ namespace PantheonOfRegions.Behaviours
 
             _control.GetAction<SetVector3XYZ>("Init").x = transform.position.x;
 
-            //_attack.SetState(_attack.Fsm.StartState);
-            //_control.SetState(_control.Fsm.StartState);
+            _attack.SetState(_attack.Fsm.StartState);
+            _control.SetState(_control.Fsm.StartState);
 
-            //_control.SendEvent("READY");
+            _attack.GetAction<ChaseObjectV2>("Chase").accelerationForce = 30f;
 
-            //yield return new WaitUntil(() => _control.ActiveStateName == "Emerge");
+            _control.SendEvent("READY");
 
-            //_control.SendEvent("READY");
+            yield return new WaitUntil(() => _control.ActiveStateName == "Emerge");
+
+            _control.SendEvent("READY");
         }
     }
 }

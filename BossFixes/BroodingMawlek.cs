@@ -12,8 +12,9 @@ namespace PantheonOfRegions.Behaviours
             _control = gameObject.LocateMyFSM("Mawlek Control");
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
+            _control.Fsm.GetFsmBool("Skip Title").Value = true;
             //_control.SetState("Init");
 
             //_control.GetState("Wake Land").AddMethod(() => _control.SetState("Start"));
@@ -23,9 +24,5 @@ namespace PantheonOfRegions.Behaviours
             //_control.SendEvent("WAKE");
         }
 
-        private void Update()
-        {
-            Modding.Logger.Log("[Mawlek] " + _control.ActiveStateName);
-        }
     }
 }

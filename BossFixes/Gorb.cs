@@ -24,27 +24,27 @@ namespace PantheonOfRegions.Behaviours
 
             for (int index = 1; index <= 7; index++)
             {
-                _movement.Fsm.GetFsmVector3($"P{index}").Value = RandomVector3();
+                _movement.Fsm.GetFsmVector2($"P{index}").Value = RandomVector2();
             }
 
             _movement.GetAction<FloatCompare>("Hover", 4).float2 = 30f;
             _movement.GetAction<FloatCompare>("Hover", 5).float2 = 65f;
-            _movement.GetAction<FloatCompare>("Hover", 6).float2 = 18f;
+            _movement.GetAction<FloatCompare>("Hover", 6).float2 = 12f;
             _movement.GetAction<FaceObject>("Hover").objectB = HeroController.instance.gameObject;
             
             _movement.GetAction<FloatTestToBool>("Set Warp", 2).float2 = 48f;
             _movement.GetAction<FloatTestToBool>("Set Warp", 3).float2 = 48f;
 
             _movement.GetAction<SetPosition>("Return").x = 48f;
-            _movement.GetAction<SetPosition>("Return").y = 18f;
+            _movement.GetAction<SetPosition>("Return").y = 20f;
         }
 
-        private Vector3 RandomVector3()
+        private Vector2 RandomVector2()
         {
             float x = Random.Range(30f, 65f);
-            float y = Random.Range(14f, 22f);
+            float y = Random.Range(15f, 22f);
 
-            return new Vector3(x, y, .006f);
+            return new Vector2(x, y);
         }
     }
 }

@@ -76,9 +76,10 @@ namespace PantheonOfRegions.Behaviours
             _spawn.InsertCustomAction("Spawn", () =>
             {
                 GameObject shade = Instantiate(PantheonOfRegions.GameObjects["sibling"], _spawn.Fsm.GetFsmVector3("Spawn Vector").Value, Quaternion.identity);
+                GameObject.DontDestroyOnLoad(shade);
                 shade.AddComponent<EnemyTracker>();
                 shade.SetActive(true);
-                GameObject.DontDestroyOnLoad(shade);
+                Destroy(shade.transform.GetChild(6).gameObject);
                 _spawn.Fsm.GetFsmGameObject("Spawned Enemy").Value = shade;
             }, 6);
 

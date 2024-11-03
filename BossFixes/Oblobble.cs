@@ -1,5 +1,7 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
+using Osmi.Game;
+using UnityEngine;
 
 namespace PantheonOfRegions.Behaviours
 {
@@ -7,25 +9,33 @@ namespace PantheonOfRegions.Behaviours
     {
         private PlayMakerFSM _attack;
         private PlayMakerFSM _bounce;
-
+        private PlayMakerFSM _rage;
+        private int sharedhp;
+        private bool rage = false;
         private void Awake()
         {
             _attack = gameObject.LocateMyFSM("Fatty Fly Attack");
             _bounce = gameObject.LocateMyFSM("fat fly bounce");
+            _rage = gameObject.LocateMyFSM("Set Rage");
         }    
         
-        private IEnumerator Start()
+        private void Start()
         {
-            _bounce.GetAction<SetPosition>("Swoop In").z = 0.0f;
-            _bounce.GetAction<Translate>("Swoop In").y = -15.0f;
-            _bounce.GetAction<iTweenMoveBy>("Swoop In").vector = Vector3.zero;
-            _bounce.GetAction<iTweenMoveBy>("Swoop In").time = 0.0f;
 
-            _attack.SetState("Init");
-            _bounce.SetState("Initialise");
-
-            yield return new WaitUntil(() => _bounce.ActiveStateName == "Swoop In");
-            _bounce.SendEvent("SUMMON");
+        }
+        private void Update()
+        {
+            sharedhp = GameObject.Find("colosseum champions").GetComponent<SharedHealthManager>().HP;
+            if (sharedhp < 600 && rage == false)
+            {
+                
+                GameObject rageblobble = Instantiate(PantheonOfRegions.GameObjects["oblobble"], new Vector2(110.0f, 10.0f), Quaternion.identity);
+                GameObject.DontDestroyOnLoad(rageblobble);
+                rageblobble.AddToShared(GameObject.Find("colosseum champions").GetComponent<SharedHealthManager>());
+                rageblobble.SetActive(true);
+                rage = true;
+                Destroy(gameObject);
+            }
         }
     }
 }
