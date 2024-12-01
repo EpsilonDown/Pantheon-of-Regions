@@ -2,6 +2,7 @@ using Vasi;
 using HutongGames.PlayMaker.Actions;
 using Random = UnityEngine.Random;
 //Current bug: Boss randomly teleports to y=42f - change randomv2 to randomvector3?
+//or disable corpse reflection
 namespace PantheonOfRegions.Behaviours
 {
     internal class Gorb : MonoBehaviour
