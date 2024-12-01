@@ -14,7 +14,7 @@ namespace PantheonOfRegions.Behaviours
 
         private void Start()
         {
-            GameObject hatcherCage = GameObject.Find("hatcher cage")
+            GameObject hatcherCage = GameObject.Find("Hatcher Cage (2)(Clone)")
             //GameObject hatcherCage = Instantiate(PantheonOfRegions.GameObjects["hatchercage"], transform.position, Quaternion.identity);
             hatcherCage.SetActive(true);
             foreach (var collider in hatcherCage.GetComponents<BoxCollider2D>())
