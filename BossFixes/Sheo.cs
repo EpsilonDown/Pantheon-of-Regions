@@ -1,4 +1,3 @@
-using Vasi;
 using HutongGames.PlayMaker.Actions;
 
 namespace PantheonOfRegions.Behaviours
@@ -30,6 +29,8 @@ namespace PantheonOfRegions.Behaviours
             
             _sheoControl.GetAction<Wait>("Look").time.Value = 1.25f;
             _corpseControl.GetAction<Wait>("Death Land").time = 1.25f;
+            
+            _hm.hp = 99999;
         }
     }
 }
