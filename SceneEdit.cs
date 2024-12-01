@@ -154,15 +154,16 @@ public sealed partial class BossAdder : MonoBehaviour
         		running = true;
 				GameObject Oro = GameObject.Find("Brothers/Oro");
                 GameObject Sheo = SpawnBoss("sheo", new Vector2(45.0f, 6.9f));
+
                 Oro
                     .LocateMyFSM("nailmaster")
-                    .InsertCustomAction("Init", () =>
+                    .InsertCustomAction("Reactivate", () =>
                     {
                        Sheo!.SetActive(true);
                        Sheo!.LocateMyFSM("nailmaster_sheo").SetState("Look");
                         new[] { "Brothers/Oro", "Brothers/Mato" }
                         .Map(s => GameObject.Find(s)).Append(Sheo)
-                        .ShareHealth(name: "nailmasters").HP = 1000;
+                        .ShareHealth(name: "nailmasters").HP = 1500;
                     }, 0);
                 break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
