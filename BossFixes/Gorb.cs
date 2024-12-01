@@ -1,7 +1,7 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
 using Random = UnityEngine.Random;
-//Current bug: Boss randomly teleports to y=42f
+//Current bug: Boss randomly teleports to y=42f - change randomv2 to randomvector3?
 namespace PantheonOfRegions.Behaviours
 {
     internal class Gorb : MonoBehaviour
@@ -25,7 +25,7 @@ namespace PantheonOfRegions.Behaviours
 
             for (int index = 1; index <= 7; index++)
             {
-                _movement.Fsm.GetFsmVector2($"P{index}").Value = RandomVector2();
+                _movement.Fsm.GetFsmVector2($"P{index}").Value = RandomVector3();
             }
 
             _movement.GetAction<FloatCompare>("Hover", 4).float2 = 30f;
@@ -46,6 +46,14 @@ namespace PantheonOfRegions.Behaviours
             float y = Random.Range(15f, 22f);
 
             return new Vector2(x, y);
+        }
+        private Vector3 RandomVector3()
+        {
+            float x = Random.Range(30f, 65f);
+            float y = Random.Range(15f, 22f);
+            float z = 0.006f;
+
+            return new Vector3(x, y, z);
         }
     }
 }
