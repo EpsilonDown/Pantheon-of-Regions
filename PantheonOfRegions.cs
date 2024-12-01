@@ -110,7 +110,7 @@ namespace PantheonOfRegions
             "BIGFLY_MAIN" => "Flies",
 
             "NIGHTMARE_GRIMM_SUPER" => "Nightmare",
-            "NIGHTMARE_GRIMM_MAIN" => "Incarnates",
+            "NIGHTMARE_GRIMM_MAIN" => "and ZOTE",
             "HK_PRIME_MAIN" => "Void Vessels",
             "ABSOLUTE_RADIANCE_MAIN" => "RADIANCE",
             "ABOLUTE_RADIANCE_SUPER" => "Mother Of Moths",
