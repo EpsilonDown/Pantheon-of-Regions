@@ -25,7 +25,7 @@ namespace PantheonOfRegions.Behaviours
 
             for (int index = 1; index <= 7; index++)
             {
-                _movement.Fsm.GetFsmVector2($"P{index}").Value = RandomVector3();
+                _movement.Fsm.GetFsmVector3($"P{index}").Value = RandomVector3();
             }
 
             _movement.GetAction<FloatCompare>("Hover", 4).float2 = 30f;
