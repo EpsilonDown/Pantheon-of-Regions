@@ -19,14 +19,11 @@ namespace PantheonOfRegions.Behaviours
             if (!PlayerData.instance.statueStateNailmasters.usingAltVersion) yield break;
 
             _oroControl.InsertMethod("Look 2", 0, SetSheoState);
-            _oroControl.InsertMethod("Reactivate", 0, StartPhase2);
 
             CallSheo();
         }
 
         private void SetSheoState() => _sheo.LocateMyFSM("nailmaster_sheo").SetState("Look");
-
-        private void StartPhase2() { gameObject.AddComponent<P2HealthController>(); gameObject.transform.position = new Vector3(45.0f, 6.9f, 0); }
 
         private void CallSheo()
         {
