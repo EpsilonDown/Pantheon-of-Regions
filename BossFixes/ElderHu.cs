@@ -1,7 +1,7 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
 using Random = UnityEngine.Random;
-
+//1st method or 2nd?
 namespace PantheonOfRegions.Behaviours
 {
     internal class ElderHu : MonoBehaviour
@@ -82,21 +82,21 @@ namespace PantheonOfRegions.Behaviours
             _movement.GetAction<SetPosition>("Return").x = 30;
             _movement.GetAction<SetPosition>("Return").y = 10;
 
-            foreach (Transform ringTransform in _ringHolder.transform)
+            /*foreach (Transform ringTransform in _ringHolder.transform)
             {
-                //ringTransform.position = new Vector2(ringTransform.position.x, HeroController.instance.transform.position.y + 3);
+                ringTransform.position = new Vector2(ringTransform.position.x, HeroController.instance.transform.position.y + 3);
                 PlayMakerFSM ringCtrl = ringTransform.GetComponent<PlayMakerFSM>();
                 ringCtrl.GetAction<FloatCompare>("Down").float2 = 9f;
                 FsmState checkPos = ringCtrl.GetState("Check Pos");
 
-                //checkPos.GetAction<FloatCompare>(1).lessThan = new FsmEvent("RESET");
-                //checkPos.GetAction<FloatCompare>(2).greaterThan = new FsmEvent("RESET");
-                //checkPos.RemoveTransition("CANCEL");
-                //checkPos.AddTransition("RESET", "Reset");
-                //ringCtrl.GetState("Reset").RemoveAction<SetPosition>();
-                //ringCtrl.GetState("Antic").InsertMethod(0, () => ringTransform.position = new Vector2(ringTransform.position.x, HeroController.instance.transform.position.y + 3));
-                //ringCtrl.SetState(ringCtrl.Fsm.StartState);
-            }
+                checkPos.GetAction<FloatCompare>(1).lessThan = new FsmEvent("RESET");
+                checkPos.GetAction<FloatCompare>(2).greaterThan = new FsmEvent("RESET");
+                checkPos.RemoveTransition("CANCEL");
+                checkPos.AddTransition("RESET", "Reset");
+                ringCtrl.GetState("Reset").RemoveAction<SetPosition>();
+                ringCtrl.GetState("Antic").InsertMethod(0, () => ringTransform.position = new Vector2(ringTransform.position.x, HeroController.instance.transform.position.y + 3));
+                ringCtrl.SetState(ringCtrl.Fsm.StartState);
+            } */
             
         }
 
