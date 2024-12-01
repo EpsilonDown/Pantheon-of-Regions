@@ -7,14 +7,12 @@ namespace PantheonOfRegions.Behaviours
         private PlayMakerFSM _sheoControl;
         private PlayMakerFSM _corpseControl;
         private PlayMakerFSM _stunControl;
-        private HealthManager _hm;
 
         private void Awake()
         {
             _sheoControl = gameObject.LocateMyFSM("nailmaster_sheo");
             _corpseControl = gameObject.transform.Find("Corpse Sheo(Clone)").gameObject.LocateMyFSM("Death Land");
-;            _stunControl = gameObject.LocateMyFSM("Stun Control");
-            _hm = GetComponent<HealthManager>();
+            _stunControl = gameObject.LocateMyFSM("Stun Control");
         }
 
         private IEnumerator Start()
@@ -29,8 +27,6 @@ namespace PantheonOfRegions.Behaviours
             
             _sheoControl.GetAction<Wait>("Look").time.Value = 1.25f;
             _corpseControl.GetAction<Wait>("Death Land").time = 1.25f;
-            
-            _hm.hp = 99999;
         }
     }
 }
