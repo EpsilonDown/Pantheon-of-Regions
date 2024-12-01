@@ -1,7 +1,7 @@
 using HutongGames.PlayMaker.Actions;
 using Osmi.Game;
 using Vasi;
-
+//Rage Phase not working - disconnect HP first and see?
 namespace PantheonOfRegions.Behaviours
 {
     internal class GreatNailsageSly : MonoBehaviour
