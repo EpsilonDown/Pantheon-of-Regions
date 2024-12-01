@@ -1,6 +1,7 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
 using Random = UnityEngine.Random;
+//Current bug: Boss randomly teleports to y=42f
 namespace PantheonOfRegions.Behaviours
 {
     internal class Gorb : MonoBehaviour
