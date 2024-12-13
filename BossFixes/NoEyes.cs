@@ -9,10 +9,11 @@ namespace PantheonOfRegions.Behaviours
 
         private PlayMakerFSM _movement;
         private PlayMakerFSM _shotSpawn;
-
+        private PlayMakerFSM _escal;
         private void Awake()
         {
             _movement = gameObject.LocateMyFSM("Movement");
+            _escal = gameObject.LocateMyFSM("Escalation");
             _shotSpawn = gameObject.LocateMyFSM("Shot Spawn");
 
             var corpse = ReflectionHelper.GetField<EnemyDeathEffects, GameObject>(GetComponent<EnemyDeathEffectsNoEffect>(), "corpse");
@@ -55,6 +56,7 @@ namespace PantheonOfRegions.Behaviours
             _shotSpawn.GetState("Spawn L").InsertMethod(6, () => _heads.Add(_shotSpawn.Fsm.GetFsmGameObject("Shot").Value));
             _shotSpawn.GetState("Spawn R").InsertMethod(1, () => _heads.Add(_shotSpawn.Fsm.GetFsmGameObject("Shot").Value));
             _shotSpawn.GetState("Spawn R").InsertMethod(6, () => _heads.Add(_shotSpawn.Fsm.GetFsmGameObject("Shot").Value));
+            _escal.ChangeTransition("Idle","TOOK DAMAGE","Escalate 2");
         }
         
         private Vector3 RandomVector3()

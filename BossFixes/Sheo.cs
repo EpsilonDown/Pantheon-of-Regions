@@ -1,3 +1,4 @@
+using Vasi;
 using HutongGames.PlayMaker.Actions;
 
 namespace PantheonOfRegions.Behaviours
@@ -11,7 +12,7 @@ namespace PantheonOfRegions.Behaviours
         private void Awake()
         {
             _sheoControl = gameObject.LocateMyFSM("nailmaster_sheo");
-            _corpseControl = gameObject.transform.Find("Corpse Sheo(Clone)").gameObject.LocateMyFSM("Death Land");
+            //_corpseControl = gameObject.transform.Find("Corpse Sheo(Clone)(Clone)").gameObject.LocateMyFSM("Death Land");
             _stunControl = gameObject.LocateMyFSM("Stun Control");
         }
 
@@ -20,13 +21,18 @@ namespace PantheonOfRegions.Behaviours
             yield return null;
 
             while (HeroController.instance == null) yield return null;
-            
-            Destroy(_stunControl);
 
-            _sheoControl.RemoveTransition("Painting", "Look");
-            
+
+            _sheoControl.RemoveTransition("Painting", "FINISHED");
+            Modding.Logger.Log("sheo Edited 2/3");
             _sheoControl.GetAction<Wait>("Look").time.Value = 1.25f;
-            _corpseControl.GetAction<Wait>("Death Land").time = 1.25f;
+            Destroy(_stunControl);
+            _sheoControl.RemoveAction("Roar", 8);
+            _sheoControl.RemoveAction("Roar", 7);
+            _sheoControl.RemoveAction("Roar", 6);
+            _sheoControl.RemoveAction("Roar", 5);
+            _sheoControl.RemoveAction("Roar", 4);
+            Modding.Logger.Log("sheo Edited 3/3");
         }
     }
 }

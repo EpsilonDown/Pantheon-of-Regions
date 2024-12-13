@@ -1,5 +1,6 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
+using Satchel;
 
 namespace PantheonOfRegions.Behaviours
 {
@@ -14,8 +15,9 @@ namespace PantheonOfRegions.Behaviours
 
         private void Start()
         {
-            GameObject hatcherCage = GameObject.Find("Hatcher Cage (2)(Clone)")
-            //GameObject hatcherCage = Instantiate(PantheonOfRegions.GameObjects["hatchercage"], transform.position, Quaternion.identity);
+
+            GameObject hatcherCage = Instantiate(PantheonOfRegions.GameObjects["hatchercage"], transform.position + new Vector3(0f,5f,0f), Quaternion.identity);
+            //GameObject hatcherCage = GameObject.Find("Hatcher Cage(2)(Clone)");
             hatcherCage.SetActive(true);
             foreach (var collider in hatcherCage.GetComponents<BoxCollider2D>())
             {

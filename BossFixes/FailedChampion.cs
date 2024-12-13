@@ -20,26 +20,17 @@ namespace PantheonOfRegions.Behaviours
         private void Start()
         {
 
-            /* _control.GetState("Check Direction").InsertCustomAction(() =>
-            {
-                _control.SendEvent("Recover");
-            },0);
-
-            Modding.Logger.Log("Failed Champion Edited 1/3");
-            _control.GetState("Recover").AddTransition("GG BOSS", "Death Open");
-            Modding.Logger.Log("Failed Champion Edited 2/3");
-            _control.GetState("Recover").AddAction(_control.GetAction<GGCheckIfBossScene>("Check GG", 1));
-            Modding.Logger.Log("Failed Champion Edited 3/3"); */
 
             _control.GetState("Check GG").ChangeTransition("FINISHED","Recover");
-            Modding.Logger.Log("Failed Champion Edited 1/3");
+            
 
             _hpcheck.GetState("Check").RemoveAction(1);
             _hpcheck.GetState("Check").RemoveAction(0);
-            Modding.Logger.Log("Failed Champion Edited 2/3");
+            
+            _control.GetState("Rubble End").AddAction(_control.GetAction("State 1",2));
             _control.GetState("Rubble End").AddAction(new Wait()
             {
-                time = new(5f),
+                time = new(2.5f),
                 finishEvent = FsmEvent.GetFsmEvent("FINISHED")
             }); 
             

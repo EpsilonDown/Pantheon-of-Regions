@@ -9,12 +9,16 @@ namespace PantheonOfRegions.Behaviours
         
         private void Awake()
         {
-            _control = gameObject.LocateMyFSM("Control");
+            _control = gameObject.LocateMyFSM("Black Knight");
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            //_control.SetState("Init");
+            _control.SetState("Init");
+
+            yield return new WaitUntil(() => _control.ActiveStateName == "Rest");
+
+            _control.SetState("Roar Start");
 
             _control.Fsm.GetFsmBool("Final Rage").Value = true;
             
