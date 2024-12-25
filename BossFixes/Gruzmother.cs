@@ -11,6 +11,7 @@ namespace PantheonOfRegions.Behaviours
         {
             _control = gameObject.LocateMyFSM("Big Fly Control");
             _bounce = gameObject.LocateMyFSM("bouncer_control");
+            gameObject.tag = "Untagged";
         }
 
         private void Start()
