@@ -5,4 +5,6 @@ Galien - reduce homing
 UUmuu - fix bug of UUmuuu floating up, reduce health to 600
 Xero - fix broken
 NKZ - reduce health to 2000, Fix rage phase
-
+Obblobble - Rage!
+Gorb - do not spawn on platform
+Flukemarm - remove random flukefly
