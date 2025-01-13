@@ -1,0 +1,24 @@
+Common: Make Certain attack impossible when doing another action
+
+Cliff Howlers - do not spawn on platform
+Green Ambushers
+Crossroads Dominators - spawn boulders?
+Alliance of Battle - nerf health to 2200
+
+Enlightened Fanatics - Fix again...
+Deepnesting Stalkers - Spawn small Sawblades
+Queen's Tributes
+Stinger Knights - slightly fix hive knight spawn pos 
+
+
+Royal Waterguards - remove random flukefly
+City Collectors - ADD ENEMY LIMIT
+Nailmasters Family - add combo attacks
+
+Colosseum Champions - Rage
+Blind Protectors - fix bug of UUmuuu floating up, reduce health to 800?
+Lord of Flies - Remove tag of 'boss' from gruz mother?
+NKZ - reduce health to 2000, Fix rage phase
+
+Fix Cleanup
+
