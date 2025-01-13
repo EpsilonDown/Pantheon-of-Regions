@@ -1,0 +1,8 @@
+Common: Make Certain attack impossible when doing another action
+public bool GlobalAction1 = false;
+public bool GlobalAction2 = false;
+
+//NKG - No sword slam while spiking
+//Lost kin - No slam while spiking, pause spawn while spiking
+
+
