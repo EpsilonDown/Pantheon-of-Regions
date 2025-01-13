@@ -36,10 +36,8 @@ Nailmasters Family - add combo attacks
                     .InsertCustomAction("Combo", () =>
                     {
                         GlobalAction1 = true;
+                        _oroControl.SendEvnt("Nailart");
                     }, 0);
-
-
-
 
 Colosseum Champions - Rage
 Blind Protectors - fix bug of UUmuu floating up, reduce health to 800?
