@@ -1,4 +1,6 @@
 Common: Make Certain attack impossible when doing another action
+public bool GlobalAction1 = false;
+public bool GlobalAction2 = false;
 
 Cliff Howlers - do not spawn on platform
 private void Start()
@@ -27,8 +29,20 @@ Royal Waterguards - remove random flukefly
 City Collectors - ADD ENEMY LIMIT
 Nailmasters Family - add combo attacks
 
+        private IEnumerator Start()
+        {
+
+            _oroControl
+                    .InsertCustomAction("Combo", () =>
+                    {
+                        GlobalAction1 = true;
+                    }, 0);
+
+
+
+
 Colosseum Champions - Rage
-Blind Protectors - fix bug of UUmuuu floating up, reduce health to 800?
+Blind Protectors - fix bug of UUmuu floating up, reduce health to 800?
 Lord of Flies - Remove tag of 'boss' from gruz mother?
 NKZ - reduce health to 2000, Fix rage phase
 
