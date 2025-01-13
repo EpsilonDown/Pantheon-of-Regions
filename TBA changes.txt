@@ -1,6 +1,18 @@
 Common: Make Certain attack impossible when doing another action
 
 Cliff Howlers - do not spawn on platform
+private void Start()
+        {
+            _movement.Fsm.GetFsmVector3("P1").Value = Vector3(32f, 15f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P2").Value = Vector3(38f, 16f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P3").Value = Vector3(44f, 17f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P4").Value = Vector3(48f, 18f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P5").Value = Vector3(52f, 17f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P6").Value = Vector3(56f, 16f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P7").Value = Vector3(62f, 15f, 0.006f);
+        }
+    }
+
 Green Ambushers
 Crossroads Dominators - spawn boulders?
 Alliance of Battle - nerf health to 2200
@@ -20,5 +32,5 @@ Blind Protectors - fix bug of UUmuuu floating up, reduce health to 800?
 Lord of Flies - Remove tag of 'boss' from gruz mother?
 NKZ - reduce health to 2000, Fix rage phase
 
-Fix CleanUp
+Fix CleanUps
 
