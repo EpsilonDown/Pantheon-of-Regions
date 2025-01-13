@@ -20,5 +20,5 @@ Blind Protectors - fix bug of UUmuuu floating up, reduce health to 800?
 Lord of Flies - Remove tag of 'boss' from gruz mother?
 NKZ - reduce health to 2000, Fix rage phase
 
-Fix Cleanup
+Fix CleanUp
 
