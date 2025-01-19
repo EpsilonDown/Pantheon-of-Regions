@@ -10,6 +10,7 @@ namespace PantheonOfRegions.Behaviours
         private GameObject zote;
         private PlayMakerFSM zote_control;
         private int sharedhp;
+        private SharedHealthManager hpsharer;
         private int ragecount = 0;
         private void Awake()
         {
@@ -20,7 +21,8 @@ namespace PantheonOfRegions.Behaviours
 
         private void Start()
         {
-            
+            hpsharer = GameObject.Find("nightmares").GetComponent<SharedHealthManager>();
+
             _control.GetState("Explode").AddMethod(() => zote.LocateMyFSM("Control").SendEvent("STUN"));
 
             _control.RemoveAction("Set Balloon HP", 0);
@@ -28,38 +30,36 @@ namespace PantheonOfRegions.Behaviours
             _control.RemoveTransition("Balloon?", "FINISHED");
             _control.RemoveAction("Adjust HP", 4);
 
-            //_control.Fsm.GetFsmInt("HP").Value = 2700;
-
-            /* _control.InsertCustomAction("Balloon?",() => {
-                _control.Fsm.GetFsmInt("HP").Value = sharedhp;
-            }, 0); */
+            _control.InsertCustomAction("Tele Out",() => {
+                GameObject.Find("Grey Prince(Clone)(Clone)").GetComponent<GreyPrinceZote>().LeapEnabler();
+            }, 0);
+            _control.InsertCustomAction("Spike Return", () => {
+                GameObject.Find("Grey Prince(Clone)(Clone)").GetComponent<GreyPrinceZote>().LeapBlocker();
+            }, 0);
 
         }
         private void Update()
         {
-            sharedhp = GameObject.Find("nightmares").GetComponent<SharedHealthManager>().HP;
+            sharedhp = hpsharer.HP;
             if (_control.ActiveStateName == "Balloon?")
             {
-                if (sharedhp < 2000 && ragecount == 0)
+                if (sharedhp < 1600 && ragecount == 0)
                 {
-                    zote_control.GetAction<Wait>("FT Through", 5).time = 12f;
-                    zote_control.SetState("FT Through");
+                    zote_control.SetState("Longfall");
                     _control.SendEvent("BALLOON 1");
                     ragecount++;
                     
                 }
-                else if (sharedhp < 1300 && ragecount == 1)
+                else if (sharedhp < 1000 && ragecount == 1)
                 {
-                    zote_control.GetAction<Wait>("FT Through", 5).time = 12f;
-                    zote_control.SetState("FT Through");
+                    zote_control.SetState("Longfall");
                     _control.SendEvent("BALLOON 1");
                     ragecount++;
                     
                 }
-                else if (sharedhp < 600 && ragecount == 2)
+                else if (sharedhp < 500 && ragecount == 2)
                 {
-                    zote_control.GetAction<Wait>("FT Through", 5).time = 12f;
-                    zote_control.SetState("FT Through");
+                    zote_control.SetState("Longfall");
                     _control.SendEvent("BALLOON 1");
                     ragecount++;
                     
@@ -71,7 +71,6 @@ namespace PantheonOfRegions.Behaviours
             }
             else if (_control.ActiveStateName == "Deflate")
             {
-                zote_control.GetAction<Wait>("FT Through", 5).time = 1f;
             }
         }
     }

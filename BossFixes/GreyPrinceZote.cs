@@ -7,7 +7,6 @@ namespace PantheonOfRegions.Behaviours
     {
         private PlayMakerFSM _constrainX;
         private PlayMakerFSM _control;
-        private GameObject NKG;
         private void Awake()
         {
             _constrainX = gameObject.LocateMyFSM("Constrain X");
@@ -54,14 +53,23 @@ namespace PantheonOfRegions.Behaviours
                 finishEvent = FsmEvent.GetFsmEvent("ZOTE TITLE END")
             });
 
-            
-            //_control.GetState("Send Event").AddMethod(() => NKG.LocateMyFSM("Control").SendEvent("STUN"));
+            _control.AddState("Longfall");
+            _control.GetState("Longfall").CopyActionData(_control.GetState("FT Through"));
+            _control.GetState("Longfall").AddTransition("FINISHED","FT Fall");
+            _control.GetAction<Wait>("Longfall",5).time = 10f;
 
             _constrainX.Fsm.GetFsmFloat("Edge L").Value = 70f;
             _constrainX.Fsm.GetFsmFloat("Edge R").Value = 103f;
 
 
         }
-
+        public void LeapBlocker()
+        {
+            _control.GetAction<SendRandomEventV3>("Move Choice 3").weights = new FsmFloat[] { 0f, 0f, 0f, 0.8f, 0.2f};
+        }
+        public void LeapEnabler()
+        {
+            _control.GetAction<SendRandomEventV3>("Move Choice 3").weights = new FsmFloat[] { 0.3f, 0.1f, 0.3f, 0.3f, 0.1f };
+        }
     }
 }

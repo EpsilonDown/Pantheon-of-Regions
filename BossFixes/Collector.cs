@@ -1,7 +1,5 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
-using UnityEngine;
-using Osmi.Utils;
 using Osmi.Game;
 
 namespace PantheonOfRegions.Behaviours
@@ -13,21 +11,20 @@ namespace PantheonOfRegions.Behaviours
         private GameObject roller;
         private GameObject spitter;
         private Vector3 spawnpos;
-        private int minioncount;
         private int knightcount = 0;
+        public int activeknightcount;
+        public void knightremover()
+        {
+            activeknightcount--;
+        }
+
         private Quaternion rotation = Quaternion.identity;
-        private Vector2 defaultpos = new Vector2(50f, 100f);
+
         private void Awake()
         {
             _control = gameObject.LocateMyFSM("Control");
-            gameObject.GetComponent<HealthManager>().hp = 3000;
+            gameObject.GetComponent<HealthManager>().hp = 800;
             
-            
-            
-            //roller = Instantiate(PantheonOfRegions.GameObjects["watcherknight"]);
-            //spitter = Instantiate(PantheonOfRegions.GameObjects["belfly"]);
-            
-            Modding.Logger.Log("Collector stuff instantiated");
         }
 
         private void Start()
@@ -88,33 +85,57 @@ namespace PantheonOfRegions.Behaviours
             buzzer = GameObject.Find("Buzzer R(Clone)");
             roller = GameObject.Find("Roller R(Clone)");
             spitter = GameObject.Find("Spitter R(Clone)");
+
             if (buzzer != null)
             {
                 spawnpos = buzzer.transform.position;
                 GameObject spawn = Instantiate(PantheonOfRegions.GameObjects["wingedsentry"], spawnpos, rotation);
                 spawn.SetActive(true);
+                spawn.tag = "Boss";
+                //spawn.AddComponent<CollectorMinion>();
                 DontDestroyOnLoad(spawn);
                 Destroy(buzzer);
             }
-            if (roller != null & knightcount < 6)
+            else
+            {
+                Destroy(buzzer);
+            }
+
+            if (roller != null && knightcount < 6)
             {
                 spawnpos = roller.transform.position + new Vector3(0f, 2f, 0f);
+                Destroy(roller);
                 GameObject spawn = Instantiate(PantheonOfRegions.GameObjects["watcherknight"], spawnpos, rotation);
                 spawn.AddComponent<EnemyTracker>();
+                spawn.AddComponent<CollectorKnight>();
+                spawn.tag = "Boss";
                 spawn.SetActive(true);
                 DontDestroyOnLoad(spawn);
                 spawn.GetComponent<HealthManager>().AddToShared(GameObject.Find("citycollector").GetComponent<SharedHealthManager>());
-                spawn.GetComponent<HealthManager>().hp = 350;
+                spawn.GetComponent<HealthManager>().hp = 200;
                 knightcount++;
+            }
+            else
+            {
                 Destroy(roller);
             }
+
             if (spitter != null)
             {
                 spawnpos = spitter.transform.position;
                 GameObject spawn = Instantiate(PantheonOfRegions.GameObjects["belfly"], spawnpos, rotation);
                 spawn.SetActive(true);
+                spawn.tag = "Boss";
+                //spawn.AddComponent<CollectorMinion>();
                 DontDestroyOnLoad(spawn);
                 Destroy(spitter);
+            }
+        }
+        public class CollectorKnight : MonoBehaviour
+        {
+            public void Start()
+            {
+                GameObject.Find("Jar Collector(Clone)(Clone)").GetComponent<TheCollector>().knightremover();
             }
         }
     }
