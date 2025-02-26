@@ -3,24 +3,12 @@ public bool PoR_GlobalAction1 = false;
 public bool PoR_GlobalAction2 = false;
 public int PoR_Count = 0;
 
-Cliff Howlers - do not spawn on platform
-private void Start()
-        {
-            _movement.Fsm.GetFsmVector3("P1").Value = Vector3(32f, 15f, 0.006f);
-            _movement.Fsm.GetFsmVector3("P2").Value = Vector3(38f, 16f, 0.006f);
-            _movement.Fsm.GetFsmVector3("P3").Value = Vector3(44f, 17f, 0.006f);
-            _movement.Fsm.GetFsmVector3("P4").Value = Vector3(48f, 18f, 0.006f);
-            _movement.Fsm.GetFsmVector3("P5").Value = Vector3(52f, 17f, 0.006f);
-            _movement.Fsm.GetFsmVector3("P6").Value = Vector3(56f, 16f, 0.006f);
-            _movement.Fsm.GetFsmVector3("P7").Value = Vector3(62f, 15f, 0.006f);
-        }
-    }
+Cliff Howlers
 
 Green Ambushers
 Crossroads Dominators - spawn boulders?
-Alliance of Battle - nerf health to 2200
-
-Enlightened Fanatics - Fix again...
+Alliance of Battle
+Enlightened Fanatics
 Deepnesting Stalkers - Spawn small Sawblades
 Queen's Tributes
 Stinger Knights - slightly fix hive knight spawn pos 
@@ -29,48 +17,6 @@ Stinger Knights - slightly fix hive knight spawn pos
 Royal Waterguards - remove random flukefly
 City Collectors - ADD ENEMY LIMIT
 Public-fy knightcount
- private void Update()
-        {
-            buzzer = GameObject.Find("Buzzer R(Clone)");
-            roller = GameObject.Find("Roller R(Clone)");
-            spitter = GameObject.Find("Spitter R(Clone)");
-            if (buzzer != null && minioncount < 4)
-            {
-                spawnpos = buzzer.transform.position;
-                GameObject spawn = Instantiate(PantheonOfRegions.GameObjects["wingedsentry"], spawnpos, rotation);
-                spawn.SetActive(true);
-                DontDestroyOnLoad(spawn);
-                Destroy(buzzer);
-            }
-            if (roller != null && knightcount < 2 && totalknightcount < 6)
-            {
-                spawnpos = roller.transform.position + new Vector3(0f, 2f, 0f);
-                GameObject spawn = Instantiate(PantheonOfRegions.GameObjects["watcherknight"], spawnpos, rotation);
-                spawn.AddComponent<EnemyTracker>();
-                spawn.SetActive(true);
-                DontDestroyOnLoad(spawn);
-                spawn.GetComponent<HealthManager>().AddToShared(GameObject.Find("citycollector").GetComponent<SharedHealthManager>());
-                spawn.GetComponent<HealthManager>().hp = 350;
-                knightcount++;
-                totalknightcount++;
-                Destroy(roller);
-            }
-            if (spitter != null && minioncount < 4)
-            {
-                spawnpos = spitter.transform.position;
-                GameObject spawn = Instantiate(PantheonOfRegions.GameObjects["belfly"], spawnpos, rotation);
-                spawn.SetActive(true);
-                DontDestroyOnLoad(spawn);
-                Destroy(spitter);
-            }
-        }
-Watcherknight
-private IEnumerator Start()
-        {
-            _control.InsertCustomAction("Death", () => {PoR_Count--;}, 0);
-        }
-
-
 Nailmasters Family - add combo attacks
 
         private IEnumerator Start()
