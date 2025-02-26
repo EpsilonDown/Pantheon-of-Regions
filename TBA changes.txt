@@ -1,8 +1,14 @@
 Common: Make Certain attack impossible when doing another action
+
+SEND BOSS SUMMONING TO EVERY BOSS ADDCOMPONENT
+
+
 public bool PoR_GlobalAction1 = false;
 public bool PoR_GlobalAction2 = false;
 public int PoR_Count = 0;
-
+private GameObject CoupledBoss;
+private int sharedhp = 0;
+HPManager = GameObject.Find("Boss(Clone)Clone)")\
 Cliff Howlers
 
 Green Ambushers
