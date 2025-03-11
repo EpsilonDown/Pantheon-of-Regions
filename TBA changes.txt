@@ -14,9 +14,39 @@ Cliff Howlers
 Green Ambushers
 Crossroads Dominators - spawn boulders?
 Alliance of Battle
-Enlightened Fanatics
+Enlightened Fanatics - faster xero load
 Deepnesting Stalkers - Spawn small Sawblades
+
+Uumuu - fix hitbox
+private Vector2 box;
+private Vector2 circle;
+private IEnumerator Start()
+{
+        base.gameObject.transform.SetScaleX(base.gameObject.transform.GetScaleX() + 0.07f);
+		base.gameObject.transform.SetScaleY(base.gameObject.transform.GetScaleY() + 0.07f);
+		box = base.gameObject.GetComponent<BoxCollider2D>().offset;
+		circle = base.gameObject.GetComponent<CircleCollider2D>().offset;
+		base.gameObject.GetComponent<BoxCollider2D>().offset += Vector2.up * -1.6f;
+		base.gameObject.GetComponent<CircleCollider2D>().offset += Vector2.up * -1.6f;
+}
+private void fixhitbox1()
+{
+	base.gameObject.GetComponent<BoxCollider2D>().offset = box;
+	base.gameObject.GetComponent<CircleCollider2D>().offset = circle;
+}
+private void fixhitbox2()
+{
+	base.gameObject.GetComponent<BoxCollider2D>().offset = box + Vector2.up * -1.6f;
+	base.gameObject.GetComponent<CircleCollider2D>().offset = circle + Vector2.up * -1.6f;
+}
+
+
 Queen's Tributes
+
+
+
+
+
 Stinger Knights - slightly fix hive knight spawn pos 
 
 
