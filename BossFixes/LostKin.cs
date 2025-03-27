@@ -12,10 +12,8 @@ namespace PantheonOfRegions.Behaviours
         private PlayMakerFSM _control;
         private PlayMakerFSM _spawn;
         private tk2dSprite? lostkinSprite = null;
-        private Sprite headglobSprite = null;
-        private GameObject child = null;
         private static readonly Lazy<Texture2D> lostkinTex = new(() => AssemblyUtils.GetTextureFromResources("VoidKin.png"));
-        private static readonly Texture2D headglobTex = AssemblyUtils.GetTextureFromResources("void_glob.png");
+        private BossSpawner Spawner = new BossSpawner();
 
         private void ApplyTextureToTk2dSprite(tk2dSprite sprite, Texture2D texture)
         {
@@ -28,81 +26,50 @@ namespace PantheonOfRegions.Behaviours
             sprite.GetComponent<Renderer>().material = newMaterial;
             sprite.ForceBuild();
         }
-
+        
         private void Awake()
         {
             _control = gameObject.LocateMyFSM("IK Control");
             _spawn = gameObject.LocateMyFSM("Spawn Balloon");
-            headglobSprite = Sprite.Create(headglobTex, new Rect(0, 0, 109, 110), new Vector2(0.545f, 0.55f), 64);
 
         }
 
-        private void GlobApplyTexture(GameObject projectile)
-        {
-            var renderer = projectile.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
-            renderer.sprite = headglobSprite;
-            Destroy(projectile.transform.FindChild("Gas Attack").gameObject);
-        }
+
         private void Start()
         {
-            //lostkinSprite!.CurrentSprite.material.mainTexture = lostkinTexOrig;
-            //lostkinTexOrig = lostkinSprite.CurrentSprite.material.mainTexture as Texture2D;
-            
-
-
-            /*
-            GameObject globalpool = GameObject.Find("_GameManager/GlobalPool");
-            Modding.Logger.Log("LK Edited 1");
-
-            
-            Modding.Logger.Log("LK Edited 2");
-
-            int children = globalpool.transform.childCount;
-
-            Modding.Logger.Log("LK Edited 3");
-
-            for (int i = 0; i < children; ++i)
-                child = globalpool.transform.GetChild(i).gameObject;
-                Modding.Logger.Log("LK Edited 4");
-                if (child.name == "IK Projectile DS(Clone)")
-                {
-                    Modding.Logger.Log("LK Edited 5");
-                    child.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = headglobSprite;
-                    Modding.Logger.Log("LK Edited 6");
-                    Destroy(child.transform.GetChild(0).gameObject);
-                    Modding.Logger.Log("LK Edited 7");
-                }
-                */
-                
-
-            //GameObject glob = _control.GetAction<SpawnObjectFromGlobalPool>("Dstab Land", 5).gameObject.Value;
-            //headglobSprite = glob.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite;
-            //Destroy(glob.transform.GetChild(0).gameObject);
-          
-
 
             lostkinSprite = this.GetComponent<tk2dSprite>();
             lostkinSprite!.CurrentSprite.material.mainTexture = lostkinTex.Value;
             ApplyTextureToTk2dSprite(lostkinSprite, lostkinTex.Value);
 
-            _control.InsertCustomAction("Dstab Land", () => {
-                GlobApplyTexture(_control.Fsm.GetFsmGameObject("Projectile").Value);
+
+            _control.InsertCustomAction("Dstab Land", () =>
+            {
+                _control.Fsm.GetFsmGameObject("Projectile").Value.AddComponent<Headglob>();
             }, 16);
-            _control.InsertCustomAction("Dstab Land", () => {
-                GlobApplyTexture(_control.Fsm.GetFsmGameObject("Projectile").Value);
+            _control.InsertCustomAction("Dstab Land", () =>
+            {
+                _control.Fsm.GetFsmGameObject("Projectile").Value.AddComponent<Headglob>();
             }, 14);
-            _control.InsertCustomAction("Dstab Land", () => {
-                GlobApplyTexture(_control.Fsm.GetFsmGameObject("Projectile").Value);
+            _control.InsertCustomAction("Dstab Land", () =>
+            {
+                _control.Fsm.GetFsmGameObject("Projectile").Value.AddComponent<Headglob>();
             }, 12);
-            _control.InsertCustomAction("Dstab Land", () => {
-                GlobApplyTexture(_control.Fsm.GetFsmGameObject("Projectile").Value);
+            _control.InsertCustomAction("Dstab Land", () =>
+            {
+                _control.Fsm.GetFsmGameObject("Projectile").Value.AddComponent<Headglob>();
             }, 10);
-            _control.InsertCustomAction("Dstab Land", () => {
-                GlobApplyTexture(_control.Fsm.GetFsmGameObject("Projectile").Value);
+            _control.InsertCustomAction("Dstab Land", () =>
+            {
+                _control.Fsm.GetFsmGameObject("Projectile").Value.AddComponent<Headglob>();
             }, 8);
-            _control.InsertCustomAction("Dstab Land", () => {
-                GlobApplyTexture(_control.Fsm.GetFsmGameObject("Projectile").Value);
+            _control.InsertCustomAction("Dstab Land", () =>
+            {
+                _control.Fsm.GetFsmGameObject("Projectile").Value.AddComponent<Headglob>();
             }, 6);
+
+
+
             _control.RemoveAction("Dstab Land", 2);
 
             _control.GetAction<Tk2dPlayAnimationWithEvents>("Intro Land").animationCompleteEvent = null;
@@ -155,17 +122,34 @@ namespace PantheonOfRegions.Behaviours
             _spawn.Fsm.GetFsmFloat("X Max").Value = 61 - 1;
             _spawn.Fsm.GetFsmFloat("Y Min").Value = 6 + 1;
             _spawn.Fsm.GetFsmFloat("Y Max").Value = 6 + 5;
+            _spawn.Fsm.GetFsmFloat("Wait Min").Value = 5;
+            _spawn.Fsm.GetFsmFloat("Wait Max").Value = 6;
             _spawn.RemoveAction("Spawn", 8);
             _spawn.RemoveAction("Spawn", 3);
             _spawn.InsertCustomAction("Spawn", () =>
             {
-                GameObject shade = Instantiate(PantheonOfRegions.GameObjects["sibling"], _spawn.Fsm.GetFsmVector3("Spawn Vector").Value, Quaternion.identity);
-                GameObject.DontDestroyOnLoad(shade);
-                shade.AddComponent<EnemyTracker>();
+                GameObject shade = Spawner.SpawnBoss("sibling", _spawn.Fsm.GetFsmVector3("Spawn Vector").Value);
                 shade.SetActive(true);
                 Destroy(shade.transform.GetChild(6).gameObject);
                 _spawn.Fsm.GetFsmGameObject("Spawned Enemy").Value = shade;
             }, 6);
+        }
+    }
+    internal class Headglob : MonoBehaviour
+    {
+        private Sprite headglobSprite = null;
+        private static readonly Texture2D headglobTex = AssemblyUtils.GetTextureFromResources("void_glob.png");
+        private int globedit = 0;
+        private void GlobApplyTexture(GameObject projectile)
+        {
+            var renderer = projectile.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
+            renderer.sprite = headglobSprite;
+            Destroy(projectile.transform.FindChild("Gas Attack").gameObject);
+        }
+        private void Awake()
+        {
+            headglobSprite = Sprite.Create(headglobTex, new Rect(0, 0, 109, 110), new Vector2(0.545f, 0.55f), 64);
+            GlobApplyTexture(gameObject);
         }
     }
 }

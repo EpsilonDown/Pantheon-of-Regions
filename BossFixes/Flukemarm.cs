@@ -16,14 +16,15 @@ namespace PantheonOfRegions.Behaviours
         private void Start()
         {
 
-            GameObject hatcherCage = Instantiate(PantheonOfRegions.GameObjects["hatchercage"], transform.position + new Vector3(0f,5f,0f), Quaternion.identity);
-            //GameObject hatcherCage = GameObject.Find("Hatcher Cage(2)(Clone)");
+            GameObject hatcherCage = Instantiate(PantheonOfRegions.GameObjects["hatchercage"], transform.position + new Vector3(0f,10f,0f), Quaternion.identity);
             hatcherCage.SetActive(true);
             foreach (var collider in hatcherCage.GetComponents<BoxCollider2D>())
             {
                 Destroy(collider);
             }
             _mother.Fsm.GetFsmGameObject("Cage").Value = hatcherCage;
+            //GameObject.Destroy(GameObject.Find("Fluke Fly"));
+            
 
         }
     }

@@ -8,7 +8,9 @@ namespace PantheonOfRegions.Behaviours
     {
         private PlayMakerFSM _control;
         private PlayMakerFSM _hpcheck;
-        private int sharedhp;
+        private SharedHealthManager hpsharer;
+        private GameObject Mawlek;
+        private BossSpawner Spawner = new BossSpawner();
         private bool end = false;
         private void Awake()
         {
@@ -19,8 +21,12 @@ namespace PantheonOfRegions.Behaviours
 
         private void Start()
         {
-
-
+            Mawlek = Spawner.SpawnBoss("broodingmawlek", new Vector2(60.0f, 50.0f));
+            _control.InsertCustomAction("Start Fall", () =>
+             {
+                 Mawlek.SetActive(true);
+                 hpsharer = new[] { gameObject , Mawlek }.ShareHealth(initialHP: 1410, name: "Crossroads");
+             }, 0);
             _control.GetState("Check GG").ChangeTransition("FINISHED","Recover");
             
 
@@ -32,28 +38,28 @@ namespace PantheonOfRegions.Behaviours
             {
                 time = new(2.5f),
                 finishEvent = FsmEvent.GetFsmEvent("FINISHED")
-            }); 
-            
+            });
+
         }
         private void Update()
         {
-            sharedhp = GameObject.Find("Crossroads").GetComponent<SharedHealthManager>().HP;
-            if (sharedhp < 1030 && _hpcheck.Fsm.GetFsmBool("Stun 1").Value == false)
+            int sharedhp = hpsharer.HP;
+            if (sharedhp < 1010 && _hpcheck.Fsm.GetFsmBool("Stun 1").Value == false)
             {
                 _hpcheck.Fsm.GetFsmBool("Stun 1").Value = true;
                 _hpcheck.SendEvent("STUN");
 
             }
-            else if (sharedhp < 530 && _hpcheck.Fsm.GetFsmBool("Stun 2").Value == false)
+            else if (sharedhp < 510 && _hpcheck.Fsm.GetFsmBool("Stun 2").Value == false)
             {
                 _hpcheck.Fsm.GetFsmBool("Stun 2").Value = true;
                 _hpcheck.SendEvent("STUN");
 
             }
-            else if (sharedhp < 30 && end == false)
+            else if (sharedhp < 10 && end == false)
             {
                 _hpcheck.SendEvent("STUN");
-                gameObject.GetComponent<HealthManager>().StopSharing(50);
+                gameObject.GetComponent<HealthManager>().StopSharing(10);
                 
                 
                 end = true;

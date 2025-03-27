@@ -6,7 +6,6 @@ namespace PantheonOfRegions.Behaviours
     public class Sheo : MonoBehaviour
     {
         private PlayMakerFSM _sheoControl;
-        private PlayMakerFSM _corpseControl;
         private PlayMakerFSM _stunControl;
 
         private void Awake()
@@ -16,23 +15,27 @@ namespace PantheonOfRegions.Behaviours
             _stunControl = gameObject.LocateMyFSM("Stun Control");
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
-            yield return null;
-
-            while (HeroController.instance == null) yield return null;
-
-
+            GameObject Oro = GameObject.Find("Brothers/Oro");
+            GameObject Mato = GameObject.Find("Brothers/Oro");
             _sheoControl.RemoveTransition("Painting", "FINISHED");
-            Modding.Logger.Log("sheo Edited 2/3");
             _sheoControl.GetAction<Wait>("Look").time.Value = 1.25f;
-            Destroy(_stunControl);
+            //Destroy(_stunControl);
             _sheoControl.RemoveAction("Roar", 8);
             _sheoControl.RemoveAction("Roar", 7);
             _sheoControl.RemoveAction("Roar", 6);
             _sheoControl.RemoveAction("Roar", 5);
             _sheoControl.RemoveAction("Roar", 4);
             Modding.Logger.Log("sheo Edited 3/3");
+
+            _sheoControl.GetState("GSlash Charge").AddCustomAction(() =>
+            {
+                Oro.LocateMyFSM("Nailmaster").SetState("D Slash Bro");
+                Mato.LocateMyFSM("Nailmaster").SetState("Cyclone Bro");
+            });
+
+
         }
     }
 }

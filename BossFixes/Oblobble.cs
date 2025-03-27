@@ -11,6 +11,7 @@ namespace PantheonOfRegions.Behaviours
         private PlayMakerFSM _bounce;
         private PlayMakerFSM _rage;
         private int sharedhp;
+        private GameObject healthsharer;
         private bool rage = false;
         private void Awake()
         {
@@ -21,18 +22,19 @@ namespace PantheonOfRegions.Behaviours
         
         private void Start()
         {
-
+            healthsharer = GameObject.Find("colosseum champions");
         }
         private void Update()
         {
-            sharedhp = GameObject.Find("colosseum champions").GetComponent<SharedHealthManager>().HP;
-            if (sharedhp < 600 && rage == false)
+            sharedhp = healthsharer.GetComponent<SharedHealthManager>().HP;
+            if (sharedhp < 400 && rage == false)
             {
                 
                 GameObject rageblobble = Instantiate(PantheonOfRegions.GameObjects["oblobble"], new Vector2(110.0f, 10.0f), Quaternion.identity);
                 GameObject.DontDestroyOnLoad(rageblobble);
                 rageblobble.AddToShared(GameObject.Find("colosseum champions").GetComponent<SharedHealthManager>());
                 rageblobble.SetActive(true);
+                rageblobble.LocateMyFSM("Set Rage").SendEvent("OBLOBBLE RAGE");
                 rage = true;
                 Destroy(gameObject);
             }

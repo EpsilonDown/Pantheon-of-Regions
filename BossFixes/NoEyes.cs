@@ -15,7 +15,7 @@ namespace PantheonOfRegions.Behaviours
             _movement = gameObject.LocateMyFSM("Movement");
             _escal = gameObject.LocateMyFSM("Escalation");
             _shotSpawn = gameObject.LocateMyFSM("Shot Spawn");
-
+            Destroy(gameObject.LocateMyFSM("Attacking"));
             var corpse = ReflectionHelper.GetField<EnemyDeathEffects, GameObject>(GetComponent<EnemyDeathEffectsNoEffect>(), "corpse");
             corpse.LocateMyFSM("Control").GetState("End").RemoveAction<CreateObject>();
         }

@@ -1,5 +1,6 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
+using UnityEngine;
 namespace PantheonOfRegions.Behaviours
 {
 
@@ -18,7 +19,7 @@ namespace PantheonOfRegions.Behaviours
         {
             
             gameObject.transform.position = new Vector3(88f, 10f, 0f);
-
+            gameObject.GetComponent<HealthManager>().hp = 3000000;
             _control.RemoveAction("Spit L", 0);
             _control.RemoveAction("Spit R", 0);
             _control.RemoveAction("Level 1", 0);
@@ -55,8 +56,6 @@ namespace PantheonOfRegions.Behaviours
 
             _control.AddState("Longfall");
             _control.GetState("Longfall").CopyActionData(_control.GetState("FT Through"));
-            _control.GetState("Longfall").AddTransition("FINISHED","FT Fall");
-            _control.GetAction<Wait>("Longfall",5).time = 10f;
 
             _constrainX.Fsm.GetFsmFloat("Edge L").Value = 70f;
             _constrainX.Fsm.GetFsmFloat("Edge R").Value = 103f;

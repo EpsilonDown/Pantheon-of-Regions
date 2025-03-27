@@ -1,6 +1,5 @@
 using Vasi;
 using HutongGames.PlayMaker.Actions;
-using Random = UnityEngine.Random;
 using Osmi.Game;
 
 namespace PantheonOfRegions.Behaviours
@@ -23,7 +22,7 @@ namespace PantheonOfRegions.Behaviours
         private void Start()
         {
             _attack.RemoveAction("Init 2", 1);
-            _attack.Fsm.GetFsmInt("HP").Value = 1800;
+            _attack.Fsm.GetFsmInt("HP").Value = 1200;
             _attack.RemoveAction("Double?", 0);
             _attack.InsertCustomAction("Double?", () => { 
                _attack.Fsm.GetFsmInt("HP").Value = GameObject.Find("Howlers").GetComponent<SharedHealthManager>().HP;
@@ -35,12 +34,15 @@ namespace PantheonOfRegions.Behaviours
 
             Destroy(gameObject.LocateMyFSM("Broadcast Ghost Death"));
             _movement.SetState(_movement.Fsm.StartState);
-            
 
-            for (int index = 1; index <= 7; index++)
-            {
-                _movement.Fsm.GetFsmVector3($"P{index}").Value = RandomVector3();
-            }
+
+            _movement.Fsm.GetFsmVector3("P1").Value = new Vector3(32f, 16f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P2").Value = new Vector3(38f, 18f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P3").Value = new Vector3(44f, 20f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P4").Value = new Vector3(48f, 22f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P5").Value = new Vector3(52f, 20f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P6").Value = new Vector3(56f, 18f, 0.006f);
+            _movement.Fsm.GetFsmVector3("P7").Value = new Vector3(62f, 16f, 0.006f);
 
             _movement.GetAction<FloatCompare>("Hover", 4).float2 = 30f;
             _movement.GetAction<FloatCompare>("Hover", 5).float2 = 65f;
@@ -55,12 +57,5 @@ namespace PantheonOfRegions.Behaviours
             _movement.GetAction<SetPosition>("Return").y = 18f;
         }
 
-        private Vector2 RandomVector3()
-        {
-            float x = Random.Range(30f, 65f);
-            float y = Random.Range(15f, 20f);
-
-            return new Vector3(x, y, 0.006f);
-        }
     }
 }
