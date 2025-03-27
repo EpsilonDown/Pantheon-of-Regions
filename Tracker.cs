@@ -4,13 +4,8 @@ namespace PantheonOfRegions
 {
     internal class EnemyTracker : MonoBehaviour
     {
-        private HealthManager _hm;
-        private PlayMakerFSM _fsm;
-
         private void Awake()
         {
-            _hm = GetComponent<HealthManager>();
-            _fsm = GetComponent<PlayMakerFSM>();
         }
 
         private void Start()
@@ -86,6 +81,10 @@ namespace PantheonOfRegions
             {
                 gameObject.AddComponent<Sheo>();
             }
+            else if (goName.Contains("Oro"))
+            {
+                gameObject.AddComponent<Oro>();
+            }
             else if (goName.Contains("Sly Boss"))
             {
                 gameObject.AddComponent<GreatNailsageSly>();
@@ -98,14 +97,27 @@ namespace PantheonOfRegions
             {
                 gameObject.AddComponent<Watcherknight>();
             }
+            else if (goName.Contains("Giant Fly"))
+            {
+                gameObject.AddComponent<Gruzmother>();
+            }
             else if (goName.Contains("Shade Sibling"))
             {
                 gameObject.AddComponent<Sibling>();
             }
-            else
+            else if (goName.Contains("HK Prime"))
             {
-                _fsm.SetState(_fsm.Fsm.StartState);
+                gameObject.AddComponent<PureVessel>();
             }
+            else if (goName.Contains("Nightmare Grimm Boss"))
+            {
+                gameObject.AddComponent<NightmareKingGrimm>();
+            }
+            else if (goName.Contains("Mage (1)"))
+            {
+                gameObject.AddComponent<Seer>();
+            }
+
         }
     }
 }

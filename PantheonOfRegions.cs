@@ -1,5 +1,4 @@
-﻿using InControl;
-using Osmi;
+﻿using Osmi;
 
 namespace PantheonOfRegions
 {
@@ -89,8 +88,8 @@ namespace PantheonOfRegions
             "FALSE_KNIGHT_DREAM_SUB" => "Dominators",
             "SISTERS_MAIN" => "Alliance",
             "SISTERS_SUB" => "of Battle",
-            "ENRAGED_GUARDIAN_SUPER" => "Restless",
-            "ENRAGED_GUARDIAN_MAIN" => "Guardians",
+            "ENRAGED_GUARDIAN_SUPER" => "Enlightened",
+            "ENRAGED_GUARDIAN_MAIN" => "Fanatics",
             "MAGE_LORD_DREAM_SUPER" => "Soul",
             "MAGE_LORD_DREAM_MAIN" => "Overlords",
             "TRAITOR_LORD_MAIN" => "Queen's",
@@ -108,12 +107,12 @@ namespace PantheonOfRegions
             "LOBSTER_LANCER_C_MAIN" => "Colosseum",
 	        "BIGFLY_SUPER" => "Lord of",
             "BIGFLY_MAIN" => "Flies",
-
-            "NIGHTMARE_GRIMM_SUPER" => "Nightmare",
-            "NIGHTMARE_GRIMM_MAIN" => "and ZOTE",
+            "BIGFLY_SUB" => "",
+            "NIGHTMARE_GRIMM_SUPER" => "Nightmare King",
+            "NIGHTMARE_GRIMM_MAIN" => "ZOTE",
             "HK_PRIME_MAIN" => "Void Vessels",
             "ABSOLUTE_RADIANCE_MAIN" => "RADIANCE",
-            "ABOLUTE_RADIANCE_SUPER" => "Mother Of Moths",
+            "ABSOLUTE_RADIANCE_SUPER" => "Mother Of Moths",
 
             _ => orig
 

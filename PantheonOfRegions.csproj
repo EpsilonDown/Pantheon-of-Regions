@@ -57,11 +57,10 @@
   </Target>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources/**" />
-    <None Remove="Assets\Resources\VoidKin.png" />
-    <None Remove="Assets\Resources\VoidKin.png.meta" />
-    <EmbeddedResource Include="Assets\Resources\VoidKin.png" />
-    <EmbeddedResource Include="Assets\Resources\VoidKin.png.meta" />
+    <EmbeddedResource Include="Resources\**" />
+    <None Remove="Assets\Resources\Seers.png" />
+    <EmbeddedResource Include="Assets\Resources\Seers.png" />
+
     
     <None Include=".gitignore" />
     <None Include="ReadMe.md" />
